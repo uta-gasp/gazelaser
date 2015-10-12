@@ -1,18 +1,116 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Text;
 using ETUDriver;
 
 namespace GazeLaser
 {
-    public partial class GazeLaser : Form
+    public class GazeLaser
     {
+        private class Menu
+        {
+            public struct TrackerState
+            {
+                public bool IsShowingOptions;
+                public bool HasDevices;
+                public bool IsConnected;
+                public bool IsCalibrated;
+                public bool IsTracking;
+            }
+
+            private ToolStripMenuItem tsmiOptions;
+            private ToolStripMenuItem tsmiETUDOptions;
+            private ToolStripMenuItem tsmiETUDCalibrate;
+            private ToolStripMenuItem tsmiETUDToggleTracking;
+            private ToolStripMenuItem tsmiExit;
+            private ContextMenuStrip cmsMenu;
+
+            public event EventHandler OnShowOptions = delegate { };
+            public event EventHandler OnShowETUDOptions = delegate { };
+            public event EventHandler OnCalibrate = delegate { };
+            public event EventHandler OnToggleTracking = delegate { };
+            public event EventHandler OnExit = delegate { };
+
+            public ContextMenuStrip Strip { get { return cmsMenu; } }
+
+            public Menu()
+            {
+                tsmiOptions = new ToolStripMenuItem("Options");
+                tsmiOptions.Click += tsmiOptions_Click;
+
+                tsmiETUDOptions = new ToolStripMenuItem("ETU-Driver");
+                tsmiETUDOptions.Click += tsmiETUDOptions_Click;
+
+                tsmiETUDCalibrate = new ToolStripMenuItem("Calibrate");
+                tsmiETUDCalibrate.Click += tsmiETUDCalibrate_Click;
+
+                tsmiETUDToggleTracking = new ToolStripMenuItem("Start");
+                tsmiETUDToggleTracking.Click += tsmiETUDToggleTracking_Click;
+
+                tsmiExit = new ToolStripMenuItem("Exit");
+                tsmiExit.Click += tsmiExit_Click;
+
+                cmsMenu = new ContextMenuStrip();
+
+                cmsMenu.Items.Add(tsmiOptions);
+                cmsMenu.Items.Add("-");
+                cmsMenu.Items.Add(tsmiETUDOptions);
+                cmsMenu.Items.Add(tsmiETUDCalibrate);
+                cmsMenu.Items.Add(tsmiETUDToggleTracking);
+                cmsMenu.Items.Add("-");
+                cmsMenu.Items.Add(tsmiExit);
+            }
+
+            public void update(TrackerState aTrackerState)
+            {
+                tsmiOptions.Enabled = !aTrackerState.IsShowingOptions && !aTrackerState.IsTracking;
+                tsmiETUDOptions.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.HasDevices && !aTrackerState.IsTracking;
+                tsmiETUDCalibrate.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && !aTrackerState.IsTracking;
+                tsmiETUDToggleTracking.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && aTrackerState.IsCalibrated;
+                tsmiETUDToggleTracking.Text = aTrackerState.IsTracking ? "Stop" : "Start";
+                tsmiExit.Enabled = !aTrackerState.IsShowingOptions;
+            }
+
+            #region Event handlers
+
+            void tsmiExit_Click(object sender, EventArgs e)
+            {
+                OnExit(this, new EventArgs());
+            }
+
+            void tsmiETUDToggleTracking_Click(object sender, EventArgs e)
+            {
+                OnToggleTracking(this, new EventArgs());
+            }
+
+            void tsmiETUDCalibrate_Click(object sender, EventArgs e)
+            {
+                OnCalibrate(this, new EventArgs());
+            }
+
+            void tsmiETUDOptions_Click(object sender, EventArgs e)
+            {
+                OnShowETUDOptions(this, new EventArgs());
+            }
+
+            void tsmiOptions_Click(object sender, EventArgs e)
+            {
+                OnShowOptions(this, new EventArgs());
+            }
+
+            #endregion
+        }
+
         private CoETUDriver iETUDriver;
+        private Menu iMenu;
+        private Options iOptions;
+        private NotifyIcon iTrayIcon;
+
         private bool iExitAfterTrackingStopped = false;
-        
+
         public GazeLaser()
         {
-            InitializeComponent();
-
             iETUDriver = new CoETUDriver();
             iETUDriver.OptionsFile = Application.StartupPath + "\\etudriver.ini";
             iETUDriver.OnRecordingStart += ETUDriver_OnRecordingStart;
@@ -20,37 +118,57 @@ namespace GazeLaser
             iETUDriver.OnCalibrated += ETUDriver_OnCalibrated;
             iETUDriver.OnDataEvent += ETUDriver_OnDataEvent;
 
-            EnabledMenuButtons();
+            iMenu = new Menu();
+            iMenu.OnShowOptions += Menu_OnShowOptions;
+            iMenu.OnShowETUDOptions += Menu_OnShowETUDOptions;
+            iMenu.OnCalibrate += Menu_OnCalibrate;
+            iMenu.OnToggleTracking += Menu_OnToggleTracking;
+            iMenu.OnExit += Menu_OnExit;
+
+            iOptions = new Options();
+            iOptions.Hide();
+
+            iTrayIcon = new NotifyIcon();
+            iTrayIcon.Icon = iOptions.Icon;
+            iTrayIcon.ContextMenuStrip = iMenu.Strip;
+            iTrayIcon.Text = "GazeLaser";
+            iTrayIcon.Visible = true;
+
+            UpdateMenu(false);
         }
 
-        private void EnabledMenuButtons()
+        private void UpdateMenu(bool aIsShowingDialog)
         {
-            tsmOptions.Enabled = iETUDriver.DeviceCount > 0 && iETUDriver.Active == 0;
-            tsmCalibrate.Enabled = iETUDriver.Ready != 0 && iETUDriver.Active == 0;
-            tsmToggleTracking.Enabled = iETUDriver.Ready != 0 && iETUDriver.Calibrated != 0;
+            Menu.TrackerState trackerState = new Menu.TrackerState();
+            trackerState.IsShowingOptions = aIsShowingDialog;
+            trackerState.HasDevices = iETUDriver.DeviceCount > 0;
+            trackerState.IsConnected = iETUDriver.Ready != 0;
+            trackerState.IsCalibrated = iETUDriver.Calibrated != 0;
+            trackerState.IsTracking = iETUDriver.Active != 0;
+            iMenu.update(trackerState);
         }
 
         private void Exit()
         {
             iETUDriver = null;
-            this.Close();
+            Application.Exit();
         }
+
+        #region ETUD event handlers
 
         private void ETUDriver_OnCalibrated()
         {
-            EnabledMenuButtons();
+            UpdateMenu(false);
         }
 
         private void ETUDriver_OnRecordingStart()
         {
-            EnabledMenuButtons();
-            tsmToggleTracking.Text = "Stop";
+            UpdateMenu(false);
         }
 
         private void ETUDriver_OnRecordingStop()
         {
-            EnabledMenuButtons();
-            tsmToggleTracking.Text = "Start";
+            UpdateMenu(false);
 
             if (iExitAfterTrackingStopped)
             {
@@ -68,17 +186,32 @@ namespace GazeLaser
             }
         }
 
-        private void tsmOptions_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Menu
+
+        private void Menu_OnShowOptions(object aSender, EventArgs aArgs)
         {
+            UpdateMenu(true);
+            iOptions.ShowDialog();
+            UpdateMenu(false);
+        }
+
+        private void Menu_OnShowETUDOptions(object aSender, EventArgs aArgs)
+        {
+            UpdateMenu(true);
             iETUDriver.showRecordingOptions();
+            UpdateMenu(false);
         }
 
-        private void tsmCalibrate_Click(object sender, EventArgs e)
+        private void Menu_OnCalibrate(object aSender, EventArgs aArgs)
         {
+            UpdateMenu(true);
             iETUDriver.calibrate();
+            UpdateMenu(false);
         }
 
-        private void tsmToggleTracking_Click(object sender, EventArgs e)
+        private void Menu_OnToggleTracking(object aSender, EventArgs aArgs)
         {
             if (iETUDriver.Active == 0)
             {
@@ -90,7 +223,7 @@ namespace GazeLaser
             }
         }
 
-        private void tsmExit_Click(object sender, EventArgs e)
+        private void Menu_OnExit(object aSender, EventArgs aArgs)
         {
             if (iETUDriver.Active != 0)
             {
@@ -102,5 +235,7 @@ namespace GazeLaser
                 Exit();
             }
         }
+
+        #endregion
     }
 }

@@ -16,7 +16,10 @@ namespace GazeLaser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GazeLaser());
+
+            GazeLaser gazeLaser = new GazeLaser();
+
+            Application.Run();
         }
     }
 }

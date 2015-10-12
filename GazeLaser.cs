@@ -103,6 +103,7 @@ namespace GazeLaser
         }
 
         private CoETUDriver iETUDriver;
+        private Pointer iPointer;
         private Menu iMenu;
         private Options iOptions;
         private NotifyIcon iTrayIcon;
@@ -117,6 +118,9 @@ namespace GazeLaser
             iETUDriver.OnRecordingStop += ETUDriver_OnRecordingStop;
             iETUDriver.OnCalibrated += ETUDriver_OnCalibrated;
             iETUDriver.OnDataEvent += ETUDriver_OnDataEvent;
+
+            iPointer = new Pointer();
+            iPointer.Show();
 
             iMenu = new Menu();
             iMenu.OnShowOptions += Menu_OnShowOptions;

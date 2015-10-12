@@ -130,7 +130,7 @@ namespace GazeLaser
             iMenu.OnExit += Menu_OnExit;
 
             iOptions = new Options();
-            iOptions.Hide();
+            //iOptions.Hide();
 
             iTrayIcon = new NotifyIcon();
             iTrayIcon.Icon = iOptions.Icon;
@@ -154,7 +154,9 @@ namespace GazeLaser
 
         private void Exit()
         {
+            iTrayIcon.Visible = false;
             iETUDriver = null;
+            GC.Collect();
             Application.Exit();
         }
 
@@ -168,10 +170,12 @@ namespace GazeLaser
         private void ETUDriver_OnRecordingStart()
         {
             UpdateMenu(false);
+            iPointer.Show();
         }
 
         private void ETUDriver_OnRecordingStop()
         {
+            iPointer.Hide();
             UpdateMenu(false);
 
             if (iExitAfterTrackingStopped)

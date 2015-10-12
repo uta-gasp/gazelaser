@@ -103,6 +103,7 @@ namespace GazeLaser
         }
 
         private CoETUDriver iETUDriver;
+        private Processor.GazeParser iGazeParser;
         private Pointer iPointer;
         private Menu iMenu;
         private Options iOptions;
@@ -118,6 +119,9 @@ namespace GazeLaser
             iETUDriver.OnRecordingStop += ETUDriver_OnRecordingStop;
             iETUDriver.OnCalibrated += ETUDriver_OnCalibrated;
             iETUDriver.OnDataEvent += ETUDriver_OnDataEvent;
+
+            iGazeParser = ObjectStorage<Processor.GazeParser>.load();
+            iGazeParser.OnNewGazePoint += GazeParser_OnNewGazePoint;
 
             iPointer = new Pointer();
             iPointer.show();
@@ -138,6 +142,11 @@ namespace GazeLaser
             iTrayIcon.Visible = true;
 
             UpdateMenu(false);
+        }
+
+        ~GazeLaser()
+        {
+            ObjectStorage<Processor.GazeParser>.save(iGazeParser);
         }
 
         private void UpdateMenu(bool aIsShowingDialog)
@@ -188,8 +197,7 @@ namespace GazeLaser
             if (aEventID == EiETUDGazeEvent.geSample)
             {
                 SiETUDSample smp = iETUDriver.LastSample;
-                //Point pt = pcbControl.PointToClient(new Point((int)smp.X[0], (int)smp.Y[0]));
-                //iParser.feed(smp.Time, pt);
+                iGazeParser.feed(smp.Time, (int)smp.X[0], (int)smp.Y[0]);
             }
         }
 
@@ -223,11 +231,13 @@ namespace GazeLaser
         {
             if (iETUDriver.Active == 0)
             {
+                iGazeParser.start();
                 iETUDriver.startTracking();
             }
             else
             {
                 iETUDriver.stopTracking();
+                iGazeParser.stop();
             }
         }
 
@@ -245,5 +255,10 @@ namespace GazeLaser
         }
 
         #endregion
+        
+        void GazeParser_OnNewGazePoint(object aSender, Processor.GazeParser.NewGazePointArgs aArgs)
+        {
+            iPointer.moveTo(aArgs.Location); 
+        }
     }
 }

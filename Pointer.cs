@@ -8,6 +8,8 @@ namespace GazeLaser
 {
     public class Pointer
     {
+        #region Declarations
+
         public enum Style
         {
             Spot,
@@ -38,11 +40,19 @@ namespace GazeLaser
             }
         }
 
+        #endregion
+
+        #region Internal members
+
         private Dictionary<Style, Bitmap> iStyleImages = new Dictionary<Style, Bitmap>();
         private Stack<Settings> iSettingsBuffer = new Stack<Settings>();
 
         private PointerWidget iWidget;
         private Settings iSettings;
+
+        #endregion
+
+        #region Properties
 
         public Style Appearance
         {
@@ -82,6 +92,10 @@ namespace GazeLaser
             }
         }
 
+        #endregion
+
+        #region Public methods
+
         public Pointer()
         {
             iStyleImages.Add(Style.Spot, Properties.Resources.pointerSpot);
@@ -89,9 +103,8 @@ namespace GazeLaser
             iStyleImages.Add(Style.Ring, Properties.Resources.pointerRing);
             
             iWidget = new PointerWidget();
-            iSettings = ObjectStorage<Settings>.load();
 
-            ApplySettings();
+            ApplySettings(ObjectStorage<Settings>.load());
         }
 
         ~Pointer()
@@ -119,18 +132,35 @@ namespace GazeLaser
 
         public void popSettings(bool aRestore)
         {
-            if (iSettingsBuffer.Count == 0 || !aRestore)
+            if (iSettingsBuffer.Count == 0)
                 return;
 
-            iSettings = iSettingsBuffer.Pop();
-            ApplySettings();
+            Settings settings = iSettingsBuffer.Pop();
+
+            if (aRestore)
+            {
+                ApplySettings(settings);
+            }
         }
 
-        private void ApplySettings()
+        public void moveTo(Point aLocation)
         {
+            iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
+        }
+
+        #endregion
+
+        #region Internal methods
+
+        private void ApplySettings(Settings aSettings)
+        {
+            iSettings = aSettings;
+            
             Appearance = iSettings.Appearance;
             Opacity = iSettings.Opacity;
             Size = iSettings.Size;
         }
+
+        #endregion
     }
 }

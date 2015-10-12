@@ -1,6 +1,6 @@
 ﻿namespace GazeLaser
 {
-    partial class Pointer
+    partial class PointerWidget
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // Pointer
+            // PointerWidget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(100, 100);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Pointer";
-            this.Opacity = 0.5D;
+            this.Name = "PointerWidget";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Pointer";

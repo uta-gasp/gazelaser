@@ -120,7 +120,7 @@ namespace GazeLaser
             iETUDriver.OnDataEvent += ETUDriver_OnDataEvent;
 
             iPointer = new Pointer();
-            iPointer.Show();
+            iPointer.show();
 
             iMenu = new Menu();
             iMenu.OnShowOptions += Menu_OnShowOptions;
@@ -130,7 +130,6 @@ namespace GazeLaser
             iMenu.OnExit += Menu_OnExit;
 
             iOptions = new Options();
-            //iOptions.Hide();
 
             iTrayIcon = new NotifyIcon();
             iTrayIcon.Icon = iOptions.Icon;
@@ -170,12 +169,12 @@ namespace GazeLaser
         private void ETUDriver_OnRecordingStart()
         {
             UpdateMenu(false);
-            iPointer.Show();
+            iPointer.show();
         }
 
         private void ETUDriver_OnRecordingStop()
         {
-            iPointer.Hide();
+            iPointer.hide();
             UpdateMenu(false);
 
             if (iExitAfterTrackingStopped)
@@ -201,7 +200,11 @@ namespace GazeLaser
         private void Menu_OnShowOptions(object aSender, EventArgs aArgs)
         {
             UpdateMenu(true);
-            iOptions.ShowDialog();
+            iOptions.load(iPointer);
+            if (iOptions.ShowDialog() == DialogResult.OK)
+            {
+                iOptions.save(iPointer);
+            }
             UpdateMenu(false);
         }
 

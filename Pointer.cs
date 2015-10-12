@@ -1,35 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GazeLaser
 {
-    public partial class Pointer : Form
+    public class Pointer
     {
-        private int SIZE = 100;
-
         public enum Style
         {
-            Spot
+            Spot,
+            Circle
         }
 
+        private PointerWidget iWidget;
         private Style iStyle;
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams createParams = base.CreateParams;
-                createParams.ExStyle |= 0x00000020; // WS_EX_TRANSPARENT
-                return createParams;
-            }
-        }
 
         public Style Appearance
         {
@@ -39,30 +25,53 @@ namespace GazeLaser
                 iStyle = value;
                 switch (iStyle)
                 {
-                    case Pointer.Style.Spot:
-                        this.BackgroundImage = Properties.Resources.pointerSpot;
+                    case Style.Spot:
+                        iWidget.BackgroundImage = Properties.Resources.pointerSpot;
                         break;
+                    case Style.Circle:
+                        iWidget.BackgroundImage = Properties.Resources.pointerCircle;
+                        break;
+                    default:
+                        throw new NotSupportedException("Pointer.Appearance");
                 }
+            }
+        }
+
+        public double Opacity
+        {
+            get { return iWidget.Opacity; }
+            set { iWidget.Opacity = value; }
+        }
+
+        public int Size
+        {
+            get { return iWidget.Width; }
+            set
+            {
+                iWidget.Width = value;
+                iWidget.Height = value;
             }
         }
 
         public Pointer()
         {
-            InitializeComponent();
-
-            this.BackColor = Color.White;
-            this.TransparencyKey = Color.White; 
+            iWidget = new PointerWidget();
             
             Appearance = Style.Spot;
             Opacity = 0.35;
+            Size = 100;
         }
 
-        protected override void OnVisibleChanged(EventArgs e)
+        public void show()
         {
-            base.OnVisibleChanged(e);
+            int size = Size;
+            iWidget.Show();
+            Size = size;
+        }
 
-            Width = SIZE;
-            Height = SIZE;
+        public void hide()
+        {
+            iWidget.Hide();
         }
     }
 }

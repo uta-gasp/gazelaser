@@ -201,10 +201,7 @@ namespace GazeLaser
         {
             UpdateMenu(true);
             iOptions.load(iPointer);
-            if (iOptions.ShowDialog() == DialogResult.OK)
-            {
-                iOptions.save(iPointer);
-            }
+            iOptions.ShowDialog();
             UpdateMenu(false);
         }
 

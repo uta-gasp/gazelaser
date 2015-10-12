@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="img\pointerRing.png" />
     <None Include="img\pointerCircle.png" />
     <None Include="img\pointerSpot.png" />
   </ItemGroup>

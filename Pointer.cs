@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,8 +11,11 @@ namespace GazeLaser
         public enum Style
         {
             Spot,
-            Circle
+            Circle,
+            Ring
         }
+
+        private Dictionary<Style, Bitmap> iStyleImages = new Dictionary<Style, Bitmap>();
 
         private PointerWidget iWidget;
         private Style iStyle;
@@ -23,16 +26,13 @@ namespace GazeLaser
             set
             {
                 iStyle = value;
-                switch (iStyle)
+                if (iStyleImages.ContainsKey(iStyle))
                 {
-                    case Style.Spot:
-                        iWidget.BackgroundImage = Properties.Resources.pointerSpot;
-                        break;
-                    case Style.Circle:
-                        iWidget.BackgroundImage = Properties.Resources.pointerCircle;
-                        break;
-                    default:
-                        throw new NotSupportedException("Pointer.Appearance");
+                    iWidget.BackgroundImage = iStyleImages[iStyle];
+                }
+                else
+                {
+                    throw new ArgumentException("Pointer.Appearance");
                 }
             }
         }
@@ -55,6 +55,10 @@ namespace GazeLaser
 
         public Pointer()
         {
+            iStyleImages.Add(Style.Spot, Properties.Resources.pointerSpot);
+            iStyleImages.Add(Style.Circle, Properties.Resources.pointerCircle);
+            iStyleImages.Add(Style.Ring, Properties.Resources.pointerRing);
+            
             iWidget = new PointerWidget();
             
             Appearance = Style.Spot;

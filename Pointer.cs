@@ -65,6 +65,8 @@ namespace GazeLaser
 
         #region Properties
 
+        // Settings
+
         public Style Appearance
         {
             get { return iAppearance; }
@@ -98,6 +100,13 @@ namespace GazeLaser
             }
         }
 
+        // Other
+
+        public bool Visible
+        {
+            get { return iWidget.Visible; }
+        }
+
         #endregion
 
         #region Public methods
@@ -110,7 +119,7 @@ namespace GazeLaser
             
             iWidget = new PointerWidget();
 
-            Settings settings = ObjectStorage<Settings>.load();
+            Settings settings = Utils.ObjectStorage<Settings>.load();
             settings.saveTo(this);
         }
 
@@ -147,7 +156,10 @@ namespace GazeLaser
 
         public void moveTo(Point aLocation)
         {
-            iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
+            if (iWidget.Visible)
+            {
+                iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
+            }
         }
 
 
@@ -169,7 +181,7 @@ namespace GazeLaser
             if (aDisposing)
             {
                 Settings settings = new Settings(this);
-                ObjectStorage<Settings>.save(settings);
+                Utils.ObjectStorage<Settings>.save(settings);
             }
 
             iDisposed = true;

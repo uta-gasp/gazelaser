@@ -50,6 +50,8 @@
             this.nudFilterTHigh = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.nudFilterTLow = new System.Windows.Forms.NumericUpDown();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.chkAutoStarterEnabled = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -59,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterWindowSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -176,6 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -356,6 +360,27 @@
             0,
             0});
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.chkAutoStarterEnabled);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(208, 141);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Misc";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // chkAutoStarterEnabled
+            // 
+            this.chkAutoStarterEnabled.AutoSize = true;
+            this.chkAutoStarterEnabled.Location = new System.Drawing.Point(6, 6);
+            this.chkAutoStarterEnabled.Name = "chkAutoStarterEnabled";
+            this.chkAutoStarterEnabled.Size = new System.Drawing.Size(150, 17);
+            this.chkAutoStarterEnabled.TabIndex = 0;
+            this.chkAutoStarterEnabled.Text = "Auto-start tracking on start";
+            this.chkAutoStarterEnabled.UseVisualStyleBackColor = true;
+            // 
             // Options
             // 
             this.AcceptButton = this.btnOK;
@@ -383,6 +408,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterWindowSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -410,6 +437,8 @@
         private System.Windows.Forms.NumericUpDown nudFilterWindowSize;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown nudFilterFixationThreshold;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckBox chkAutoStarterEnabled;
 
     }
 }

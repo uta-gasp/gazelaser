@@ -13,6 +13,11 @@ namespace GazeLaser
 
             GazeLaser gazeLaser = new GazeLaser();
 
+            if (gazeLaser.AutoStarter.Enabled)
+            {
+                gazeLaser.AutoStarter.run(gazeLaser);
+            }
+
             Application.Run();
 
             gazeLaser.Dispose();

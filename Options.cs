@@ -9,6 +9,7 @@ namespace GazeLaser
 
         private Pointer iPointer;
         private Processor.TwoLevelLowPassFilter iFilter;
+        private AutoStarter iAutoStarter;
 
         #endregion
 
@@ -24,10 +25,11 @@ namespace GazeLaser
             }
         }
 
-        public void load(Pointer aPointer, Processor.TwoLevelLowPassFilter aFilter)
+        public void load(Pointer aPointer, Processor.TwoLevelLowPassFilter aFilter, AutoStarter aAutoStarter)
         {
             iPointer = aPointer;
             iFilter = aFilter;
+            iAutoStarter = aAutoStarter;
 
             iPointer.pushSettings();
 
@@ -39,6 +41,8 @@ namespace GazeLaser
             nudFilterTHigh.Value = aFilter.THigh;
             nudFilterWindowSize.Value = aFilter.WindowSize;
             nudFilterFixationThreshold.Value = aFilter.FixationThreshold;
+
+            chkAutoStarterEnabled.Checked = iAutoStarter.Enabled;
         }
 
         public void save(bool aAccept)
@@ -51,6 +55,8 @@ namespace GazeLaser
                 iFilter.THigh = (int)nudFilterTHigh.Value;
                 iFilter.WindowSize = (int)nudFilterWindowSize.Value;
                 iFilter.FixationThreshold = (int)nudFilterFixationThreshold.Value;
+
+                iAutoStarter.Enabled = chkAutoStarterEnabled.Checked;
             }
         }
 

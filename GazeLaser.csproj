@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoStarter.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Processor\TwoLevelLowPassFilter.cs" />
     <Compile Include="GazeLaser.cs" />
     <Compile Include="Processor\GazeParser.cs" />
@@ -66,7 +68,10 @@
     <Compile Include="Processor\GazePoint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DelayedAction.cs" />
+    <Compile Include="Utils\GlobalShortcut.cs" />
     <Compile Include="Utils\ObjectStorage.cs" />
+    <Compile Include="Utils\Shortcut.cs" />
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>

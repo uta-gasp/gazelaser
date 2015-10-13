@@ -1,106 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Text;
 using ETUDriver;
 
 namespace GazeLaser
 {
     public class GazeLaser : IDisposable
     {
-        private class Menu
+        public enum TrackingState
         {
-            public struct TrackerState
-            {
-                public bool IsShowingOptions;
-                public bool HasDevices;
-                public bool IsConnected;
-                public bool IsCalibrated;
-                public bool IsTracking;
-            }
-
-            private ToolStripMenuItem tsmiOptions;
-            private ToolStripMenuItem tsmiETUDOptions;
-            private ToolStripMenuItem tsmiETUDCalibrate;
-            private ToolStripMenuItem tsmiETUDToggleTracking;
-            private ToolStripMenuItem tsmiExit;
-            private ContextMenuStrip cmsMenu;
-
-            public event EventHandler OnShowOptions = delegate { };
-            public event EventHandler OnShowETUDOptions = delegate { };
-            public event EventHandler OnCalibrate = delegate { };
-            public event EventHandler OnToggleTracking = delegate { };
-            public event EventHandler OnExit = delegate { };
-
-            public ContextMenuStrip Strip { get { return cmsMenu; } }
-
-            public Menu()
-            {
-                tsmiOptions = new ToolStripMenuItem("Options");
-                tsmiOptions.Click += tsmiOptions_Click;
-
-                tsmiETUDOptions = new ToolStripMenuItem("ETU-Driver");
-                tsmiETUDOptions.Click += tsmiETUDOptions_Click;
-
-                tsmiETUDCalibrate = new ToolStripMenuItem("Calibrate");
-                tsmiETUDCalibrate.Click += tsmiETUDCalibrate_Click;
-
-                tsmiETUDToggleTracking = new ToolStripMenuItem("Start");
-                tsmiETUDToggleTracking.Click += tsmiETUDToggleTracking_Click;
-
-                tsmiExit = new ToolStripMenuItem("Exit");
-                tsmiExit.Click += tsmiExit_Click;
-
-                cmsMenu = new ContextMenuStrip();
-
-                cmsMenu.Items.Add(tsmiOptions);
-                cmsMenu.Items.Add("-");
-                cmsMenu.Items.Add(tsmiETUDOptions);
-                cmsMenu.Items.Add(tsmiETUDCalibrate);
-                cmsMenu.Items.Add(tsmiETUDToggleTracking);
-                cmsMenu.Items.Add("-");
-                cmsMenu.Items.Add(tsmiExit);
-            }
-
-            public void update(TrackerState aTrackerState)
-            {
-                tsmiOptions.Enabled = !aTrackerState.IsShowingOptions && !aTrackerState.IsTracking;
-                tsmiETUDOptions.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.HasDevices && !aTrackerState.IsTracking;
-                tsmiETUDCalibrate.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && !aTrackerState.IsTracking;
-                tsmiETUDToggleTracking.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && aTrackerState.IsCalibrated;
-                tsmiETUDToggleTracking.Text = aTrackerState.IsTracking ? "Stop" : "Start";
-                tsmiExit.Enabled = !aTrackerState.IsShowingOptions;
-            }
-
-            #region Event handlers
-
-            void tsmiExit_Click(object sender, EventArgs e)
-            {
-                OnExit(this, new EventArgs());
-            }
-
-            void tsmiETUDToggleTracking_Click(object sender, EventArgs e)
-            {
-                OnToggleTracking(this, new EventArgs());
-            }
-
-            void tsmiETUDCalibrate_Click(object sender, EventArgs e)
-            {
-                OnCalibrate(this, new EventArgs());
-            }
-
-            void tsmiETUDOptions_Click(object sender, EventArgs e)
-            {
-                OnShowETUDOptions(this, new EventArgs());
-            }
-
-            void tsmiOptions_Click(object sender, EventArgs e)
-            {
-                OnShowOptions(this, new EventArgs());
-            }
-
-            #endregion
+            NotAvailable,
+            Disconnected,
+            Connected,
+            Calibrating,
+            Calibrated,
+            Tracking
         }
+
+        #region Internal members
 
         private CoETUDriver iETUDriver;
         private Processor.GazeParser iGazeParser;
@@ -112,8 +28,38 @@ namespace GazeLaser
         private bool iExitAfterTrackingStopped = false;
         private bool iDisposed = false;
 
+        #endregion
+
+        #region Properties
+
+        public AutoStarter AutoStarter { get; private set; }
+        public TrackingState State
+        {
+            get
+            {
+                GazeLaser.TrackingState result = TrackingState.NotAvailable;
+                if (iETUDriver.Active != 0)
+                    result = GazeLaser.TrackingState.Tracking;
+                else if (iETUDriver.Calibrated != 0)
+                    result = GazeLaser.TrackingState.Calibrated;
+                else switch (iETUDriver.Ready)
+                    {
+                        case 1: result = GazeLaser.TrackingState.Disconnected; break;
+                        case 2: result = GazeLaser.TrackingState.Connected; break;
+                        case 3: result = GazeLaser.TrackingState.Calibrating; break;
+                    }
+                return result;
+            }
+        }
+
+        #endregion
+
+        #region Public methods
+
         public GazeLaser()
         {
+            AutoStarter = Utils.ObjectStorage<AutoStarter>.load();
+
             iETUDriver = new CoETUDriver();
             iETUDriver.OptionsFile = Application.StartupPath + "\\etudriver.ini";
             iETUDriver.OnRecordingStart += ETUDriver_OnRecordingStart;
@@ -125,14 +71,13 @@ namespace GazeLaser
             iGazeParser.OnNewGazePoint += GazeParser_OnNewGazePoint;
 
             iPointer = new Pointer();
-            iPointer.show();
 
             iMenu = new Menu();
-            iMenu.OnShowOptions += Menu_OnShowOptions;
-            iMenu.OnShowETUDOptions += Menu_OnShowETUDOptions;
-            iMenu.OnCalibrate += Menu_OnCalibrate;
-            iMenu.OnToggleTracking += Menu_OnToggleTracking;
-            iMenu.OnExit += Menu_OnExit;
+            iMenu.OnShowOptions += showOptions;
+            iMenu.OnShowETUDOptions += showETUDOptions;
+            iMenu.OnCalibrate += calibrate;
+            iMenu.OnToggleTracking += toggleTracking;
+            iMenu.OnExit += Menu_Exit;
 
             iOptions = new Options();
 
@@ -142,6 +87,9 @@ namespace GazeLaser
             iTrayIcon.Text = "GazeLaser";
             iTrayIcon.Visible = true;
 
+            Utils.GlobalShortcut.add(new Utils.Shortcut("Pointer", new Action(Shortcut_TogglePointer), Keys.Pause));
+            Utils.GlobalShortcut.init();
+
             UpdateMenu(false);
         }
 
@@ -150,6 +98,48 @@ namespace GazeLaser
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        private void showOptions()
+        {
+            UpdateMenu(true);
+            iOptions.load(iPointer, iGazeParser.Filter, AutoStarter);
+            bool acceptChanges = iOptions.ShowDialog() == DialogResult.OK;
+            iOptions.save(acceptChanges);
+
+            UpdateMenu(false);
+        }
+
+        public void showETUDOptions()
+        {
+            UpdateMenu(true);
+            iETUDriver.showRecordingOptions();
+            UpdateMenu(false);
+        }
+
+        public void calibrate()
+        {
+            UpdateMenu(true);
+            iETUDriver.calibrate();
+            UpdateMenu(false);
+        }
+
+        public void toggleTracking()
+        {
+            if (iETUDriver.Active == 0)
+            {
+                iGazeParser.start();
+                iETUDriver.startTracking();
+            }
+            else
+            {
+                iETUDriver.stopTracking();
+                iGazeParser.stop();
+            }
+        }
+
+        #endregion
+
+        #region Internal methods
 
         protected virtual void Dispose(bool aDisposing)
         {
@@ -161,9 +151,13 @@ namespace GazeLaser
                 // Free any other managed objects here.
                 iPointer.Dispose();
                 iGazeParser.Dispose();
+                Utils.ObjectStorage<AutoStarter>.save(AutoStarter);
+                Utils.GlobalShortcut.close();
             }
 
             // Free any unmanaged objects here.
+            iETUDriver = null;
+            
             iDisposed = true;
         }
 
@@ -181,10 +175,10 @@ namespace GazeLaser
         private void Exit()
         {
             iTrayIcon.Visible = false;
-            iETUDriver = null;
-            GC.Collect();
             Application.Exit();
         }
+
+        #endregion
 
         #region ETUD event handlers
 
@@ -196,7 +190,6 @@ namespace GazeLaser
         private void ETUDriver_OnRecordingStart()
         {
             UpdateMenu(false);
-            iPointer.show();
         }
 
         private void ETUDriver_OnRecordingStop()
@@ -221,47 +214,9 @@ namespace GazeLaser
 
         #endregion
 
-        #region Menu
+        #region Other event handlers
 
-        private void Menu_OnShowOptions(object aSender, EventArgs aArgs)
-        {
-            UpdateMenu(true);
-            iOptions.load(iPointer, iGazeParser.Filter);
-            bool acceptChanges = iOptions.ShowDialog() == DialogResult.OK;
-            iOptions.save(acceptChanges);
-
-            UpdateMenu(false);
-        }
-
-        private void Menu_OnShowETUDOptions(object aSender, EventArgs aArgs)
-        {
-            UpdateMenu(true);
-            iETUDriver.showRecordingOptions();
-            UpdateMenu(false);
-        }
-
-        private void Menu_OnCalibrate(object aSender, EventArgs aArgs)
-        {
-            UpdateMenu(true);
-            iETUDriver.calibrate();
-            UpdateMenu(false);
-        }
-
-        private void Menu_OnToggleTracking(object aSender, EventArgs aArgs)
-        {
-            if (iETUDriver.Active == 0)
-            {
-                iGazeParser.start();
-                iETUDriver.startTracking();
-            }
-            else
-            {
-                iETUDriver.stopTracking();
-                iGazeParser.stop();
-            }
-        }
-
-        private void Menu_OnExit(object aSender, EventArgs aArgs)
+        private void Menu_Exit()
         {
             if (iETUDriver.Active != 0)
             {
@@ -274,11 +229,19 @@ namespace GazeLaser
             }
         }
 
-        #endregion
-        
-        void GazeParser_OnNewGazePoint(object aSender, Processor.GazeParser.NewGazePointArgs aArgs)
+        private void GazeParser_OnNewGazePoint(object aSender, Processor.GazeParser.NewGazePointArgs aArgs)
         {
-            iPointer.moveTo(aArgs.Location); 
+            iPointer.moveTo(aArgs.Location);
         }
+
+        private void Shortcut_TogglePointer()
+        {
+            if (iPointer.Visible)
+                iPointer.hide();
+            else
+                iPointer.show();
+        }
+
+        #endregion
     }
 }

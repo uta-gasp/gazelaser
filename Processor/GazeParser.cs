@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 
 namespace GazeLaser.Processor
@@ -47,7 +46,7 @@ namespace GazeLaser.Processor
 
         public GazeParser()
         {
-            Filter = ObjectStorage<TwoLevelLowPassFilter>.load();
+            Filter = Utils.ObjectStorage<TwoLevelLowPassFilter>.load();
 
             iPointsTimer.Interval = SAMPLE_INTERVAL;
             iPointsTimer.Tick += PointsTimer_Tick;
@@ -93,7 +92,7 @@ namespace GazeLaser.Processor
 
             if (aDisposing)
             {
-                ObjectStorage<TwoLevelLowPassFilter>.save(Filter);
+                Utils.ObjectStorage<TwoLevelLowPassFilter>.save(Filter);
             }
 
             iDisposed = true;

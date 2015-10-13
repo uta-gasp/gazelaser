@@ -1,23 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace GazeLaser
+namespace GazeLaser.Utils
 {
     public sealed class ObjectStorage<T>
     {
         private static string sOptionsFileExtension = ".xml";
-
-        private ObjectStorage() { }
-
-        private static string GetShortName(string aTypeName)
-        {
-            string[] parts = aTypeName.ToString().Split('.', '+');
-            return parts[parts.Length - 1];
-        }
 
         public static void save(object aObject)
         {
@@ -62,6 +52,14 @@ namespace GazeLaser
             }
 
             return result;
+        }
+
+        private ObjectStorage() { }
+
+        private static string GetShortName(string aTypeName)
+        {
+            string[] parts = aTypeName.ToString().Split('.', '+');
+            return parts[parts.Length - 1];
         }
     }
 }

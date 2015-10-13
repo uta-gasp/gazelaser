@@ -6,7 +6,7 @@ using ETUDriver;
 
 namespace GazeLaser
 {
-    public class GazeLaser
+    public class GazeLaser : IDisposable
     {
         private class Menu
         {
@@ -110,6 +110,7 @@ namespace GazeLaser
         private NotifyIcon iTrayIcon;
 
         private bool iExitAfterTrackingStopped = false;
+        private bool iDisposed = false;
 
         public GazeLaser()
         {
@@ -144,9 +145,26 @@ namespace GazeLaser
             UpdateMenu(false);
         }
 
-        ~GazeLaser()
+        public void Dispose()
         {
-            ObjectStorage<Processor.GazeParser>.save(iGazeParser);
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool aDisposing)
+        {
+            if (iDisposed)
+                return;
+
+            if (aDisposing)
+            {
+                // Free any other managed objects here.
+                iPointer.Dispose();
+                ObjectStorage<Processor.GazeParser>.save(iGazeParser);
+            }
+
+            // Free any unmanaged objects here.
+            iDisposed = true;
         }
 
         private void UpdateMenu(bool aIsShowingDialog)

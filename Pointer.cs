@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace GazeLaser
 {
-    public class Pointer
+    public class Pointer : IDisposable
     {
         #region Declarations
 
@@ -32,11 +32,23 @@ namespace GazeLaser
                 Size = 100;
             }
 
-            public Settings(Settings aRef)
+            public Settings(Pointer aPointer)
             {
-                Appearance = aRef.Appearance;
-                Opacity = aRef.Opacity;
-                Size = aRef.Size;
+                loadFrom(aPointer);
+            }
+
+            public void loadFrom(Pointer aPointer)
+            {
+                Appearance = aPointer.Appearance;
+                Opacity = aPointer.Opacity;
+                Size = aPointer.Size;
+            }
+
+            public void saveTo(Pointer aPointer)
+            {
+                aPointer.Appearance = Appearance;
+                aPointer.Opacity = Opacity;
+                aPointer.Size = Size;
             }
         }
 
@@ -46,9 +58,10 @@ namespace GazeLaser
 
         private Dictionary<Style, Bitmap> iStyleImages = new Dictionary<Style, Bitmap>();
         private Stack<Settings> iSettingsBuffer = new Stack<Settings>();
+        private bool iDisposed = false;
 
         private PointerWidget iWidget;
-        private Settings iSettings;
+        private Style iAppearance;
 
         #endregion
 
@@ -56,10 +69,10 @@ namespace GazeLaser
 
         public Style Appearance
         {
-            get { return iSettings.Appearance; }
+            get { return iAppearance; }
             set
             {
-                iSettings.Appearance = value;
+                iAppearance = value;
                 if (iStyleImages.ContainsKey(value))
                 {
                     iWidget.BackgroundImage = iStyleImages[value];
@@ -74,11 +87,7 @@ namespace GazeLaser
         public double Opacity
         {
             get { return iWidget.Opacity; }
-            set
-            {
-                iSettings.Opacity = value;
-                iWidget.Opacity = value;
-            }
+            set { iWidget.Opacity = value; }
         }
 
         public int Size
@@ -86,7 +95,6 @@ namespace GazeLaser
             get { return iWidget.Width; }
             set
             {
-                iSettings.Size = value;
                 iWidget.Width = value;
                 iWidget.Height = value;
             }
@@ -104,12 +112,8 @@ namespace GazeLaser
             
             iWidget = new PointerWidget();
 
-            ApplySettings(ObjectStorage<Settings>.load());
-        }
-
-        ~Pointer()
-        {
-            ObjectStorage<Settings>.save(iSettings);
+            Settings settings = ObjectStorage<Settings>.load();
+            settings.saveTo(this);
         }
 
         public void show()
@@ -126,8 +130,8 @@ namespace GazeLaser
 
         public void pushSettings()
         {
-            iSettingsBuffer.Push(iSettings);
-            iSettings = new Settings(iSettings);
+            Settings settings = new Settings(this);
+            iSettingsBuffer.Push(settings);
         }
 
         public void popSettings(bool aRestore)
@@ -139,7 +143,7 @@ namespace GazeLaser
 
             if (aRestore)
             {
-                ApplySettings(settings);
+                settings.saveTo(this);
             }
         }
 
@@ -148,17 +152,29 @@ namespace GazeLaser
             iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
         }
 
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion
 
         #region Internal methods
 
-        private void ApplySettings(Settings aSettings)
+        protected virtual void Dispose(bool aDisposing)
         {
-            iSettings = aSettings;
-            
-            Appearance = iSettings.Appearance;
-            Opacity = iSettings.Opacity;
-            Size = iSettings.Size;
+            if (iDisposed)
+                return;
+
+            if (aDisposing)
+            {
+                Settings settings = new Settings(this);
+                ObjectStorage<Settings>.save(settings);
+            }
+
+            iDisposed = true;
         }
 
         #endregion

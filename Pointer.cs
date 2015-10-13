@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 
 namespace GazeLaser
 {
@@ -8,6 +9,7 @@ namespace GazeLaser
     {
         #region Declarations
 
+        // should match image names (without the preceiding 'pointer')
         public enum Style
         {
             Spot,
@@ -16,7 +18,7 @@ namespace GazeLaser
             Cross,
             Dots,
             Rect,
-            CorssAnim,
+            CrossAnim,
             DotsAnim,
             CircleAnim
         }
@@ -119,16 +121,8 @@ namespace GazeLaser
 
         public Pointer()
         {
-            iStyleImages.Add(Style.Spot, Properties.Resources.pointerSpot);
-            iStyleImages.Add(Style.Circle, Properties.Resources.pointerCircle);
-            iStyleImages.Add(Style.Ring, Properties.Resources.pointerRing);
-            iStyleImages.Add(Style.Cross, Properties.Resources.pointerCross);
-            iStyleImages.Add(Style.Dots, Properties.Resources.pointerDots);
-            iStyleImages.Add(Style.Rect, Properties.Resources.pointerRect);
-            iStyleImages.Add(Style.CorssAnim, Properties.Resources.pointerCrossAnim);
-            iStyleImages.Add(Style.DotsAnim, Properties.Resources.pointerDotsAnim);
-            iStyleImages.Add(Style.CircleAnim, Properties.Resources.pointerCircleAnim);
-            
+            LoadStyleImages();
+
             iWidget = new PointerWidget();
 
             Settings settings = Utils.ObjectStorage<Settings>.load();
@@ -197,6 +191,24 @@ namespace GazeLaser
             }
 
             iDisposed = true;
+        }
+
+        private void LoadStyleImages()
+        {
+            Type resourceManagerType = typeof(Properties.Resources);
+            foreach (Style style in Enum.GetValues(typeof(Style)))
+            {
+                string imageName = "pointer" + style.ToString();
+                PropertyInfo property = resourceManagerType.GetProperty(imageName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+                if (property == null)
+                    throw new Exception("Internal error: missing some images for Pointer");
+
+                object image = property.GetValue(null, null);
+                if (image == null)
+                    throw new Exception("Internal error: null image for Pointer");
+
+                iStyleImages.Add(style, (Bitmap)image);
+            }
         }
 
         #endregion

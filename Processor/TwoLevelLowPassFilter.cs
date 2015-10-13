@@ -5,7 +5,7 @@ using System.Drawing;
 namespace GazeLaser.Processor
 {
     [Serializable]
-    internal class TwoLevelLowPassFilter
+    public class TwoLevelLowPassFilter
     {
         /*
         //----------------------------------------------------------------------------
@@ -37,8 +37,8 @@ namespace GazeLaser.Processor
 
         #region Constants
 
-        private const double T_LOW = 300;
-        private const double T_HIGH = 10;
+        private const int T_LOW = 300;
+        private const int T_HIGH = 10;
         private const int WINDOW_SIZE = 150;
         private const int FIXATION_THRESHOLD = 50;
 
@@ -48,7 +48,7 @@ namespace GazeLaser.Processor
 
         private double iX = Double.NaN;
         private double iY = Double.NaN;
-        private double iT = 0;
+        private int iT = 0;
         private int iInterval = 0;
 
         private Queue<GazePoint> iBuffer = new Queue<GazePoint>();
@@ -58,8 +58,8 @@ namespace GazeLaser.Processor
 
         #region Properties
 
-        public double TLow { get; set; }
-        public double THigh { get; set; }
+        public int TLow { get; set; }
+        public int THigh { get; set; }
         public int WindowSize { get; set; }
         public int FixationThreshold { get; set; }
 
@@ -103,8 +103,8 @@ namespace GazeLaser.Processor
                 iY = (aGazePoint.Y + alfa * iY) / (1.0 + alfa);
             }
 
+            //Console.WriteLine(String.Format("{0}\t{1}\t{2}\t{3}", aGazePoint.X, aGazePoint.Y, iX, iY));
             GazePoint result = new GazePoint(aGazePoint.Timestamp, new Point((int)iX, (int)iY));
-            Console.WriteLine(String.Format("{0}\t{1}\t{2}\t{3}", aGazePoint.X, aGazePoint.Y, iX, iY));
             return result;
         }
 
@@ -134,9 +134,9 @@ namespace GazeLaser.Processor
             return isFilterValid && iBuffer.Count > 1;
         }
 
-        private double EstimateCurrentT(GazePoint aGazePoint)
+        private int EstimateCurrentT(GazePoint aGazePoint)
         {
-            double result = iT;
+            int result = iT;
 
             int avgXB = 0;
             int avgYB = 0;

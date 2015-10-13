@@ -30,55 +30,74 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Options));
             this.label1 = new System.Windows.Forms.Label();
-            this.cmbAppearance = new System.Windows.Forms.ComboBox();
-            this.trbOpacity = new System.Windows.Forms.TrackBar();
+            this.cmbPointerAppearance = new System.Windows.Forms.ComboBox();
+            this.trbPointerOpacity = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.lblOpacity = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblSize = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.trbSize = new System.Windows.Forms.TrackBar();
-            ((System.ComponentModel.ISupportInitialize)(this.trbOpacity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trbSize)).BeginInit();
+            this.trbPointerSize = new System.Windows.Forms.TrackBar();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudFilterFixationThreshold = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudFilterWindowSize = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nudFilterTHigh = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nudFilterTLow = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterFixationThreshold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterWindowSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Appearance";
             // 
-            // cmbAppearance
+            // cmbPointerAppearance
             // 
-            this.cmbAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbAppearance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAppearance.FormattingEnabled = true;
-            this.cmbAppearance.Location = new System.Drawing.Point(151, 12);
-            this.cmbAppearance.Name = "cmbAppearance";
-            this.cmbAppearance.Size = new System.Drawing.Size(121, 21);
-            this.cmbAppearance.TabIndex = 1;
-            this.cmbAppearance.SelectedIndexChanged += new System.EventHandler(this.cmbAppearance_SelectedIndexChanged);
+            this.cmbPointerAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbPointerAppearance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPointerAppearance.FormattingEnabled = true;
+            this.cmbPointerAppearance.Location = new System.Drawing.Point(81, 6);
+            this.cmbPointerAppearance.Name = "cmbPointerAppearance";
+            this.cmbPointerAppearance.Size = new System.Drawing.Size(121, 21);
+            this.cmbPointerAppearance.TabIndex = 1;
+            this.cmbPointerAppearance.SelectedIndexChanged += new System.EventHandler(this.cmbAppearance_SelectedIndexChanged);
             // 
-            // trbOpacity
+            // trbPointerOpacity
             // 
-            this.trbOpacity.Location = new System.Drawing.Point(151, 39);
-            this.trbOpacity.Maximum = 9;
-            this.trbOpacity.Minimum = 1;
-            this.trbOpacity.Name = "trbOpacity";
-            this.trbOpacity.Size = new System.Drawing.Size(121, 45);
-            this.trbOpacity.TabIndex = 2;
-            this.trbOpacity.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trbOpacity.Value = 9;
-            this.trbOpacity.ValueChanged += new System.EventHandler(this.trbOpacity_ValueChanged);
+            this.trbPointerOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trbPointerOpacity.Location = new System.Drawing.Point(81, 33);
+            this.trbPointerOpacity.Maximum = 9;
+            this.trbPointerOpacity.Minimum = 1;
+            this.trbPointerOpacity.Name = "trbPointerOpacity";
+            this.trbPointerOpacity.Size = new System.Drawing.Size(121, 45);
+            this.trbPointerOpacity.TabIndex = 2;
+            this.trbPointerOpacity.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trbPointerOpacity.Value = 9;
+            this.trbPointerOpacity.ValueChanged += new System.EventHandler(this.trbOpacity_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 53);
+            this.label2.Location = new System.Drawing.Point(6, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 3;
@@ -86,8 +105,9 @@
             // 
             // lblOpacity
             // 
+            this.lblOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpacity.AutoSize = true;
-            this.lblOpacity.Location = new System.Drawing.Point(132, 53);
+            this.lblOpacity.Location = new System.Drawing.Point(62, 47);
             this.lblOpacity.Name = "lblOpacity";
             this.lblOpacity.Size = new System.Drawing.Size(13, 13);
             this.lblOpacity.TabIndex = 4;
@@ -98,30 +118,29 @@
             // 
             this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(53, 153);
+            this.btnOK.Location = new System.Drawing.Point(31, 185);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 5;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(135, 153);
+            this.btnCancel.Location = new System.Drawing.Point(113, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblSize
             // 
+            this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(132, 104);
+            this.lblSize.Location = new System.Drawing.Point(62, 98);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(13, 13);
             this.lblSize.TabIndex = 9;
@@ -131,23 +150,211 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 104);
+            this.label4.Location = new System.Drawing.Point(6, 98);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Size";
             // 
-            // trbSize
+            // trbPointerSize
             // 
-            this.trbSize.Location = new System.Drawing.Point(151, 90);
-            this.trbSize.Maximum = 30;
-            this.trbSize.Minimum = 3;
-            this.trbSize.Name = "trbSize";
-            this.trbSize.Size = new System.Drawing.Size(121, 45);
-            this.trbSize.TabIndex = 7;
-            this.trbSize.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trbSize.Value = 9;
-            this.trbSize.ValueChanged += new System.EventHandler(this.trbSize_ValueChanged);
+            this.trbPointerSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trbPointerSize.Location = new System.Drawing.Point(81, 84);
+            this.trbPointerSize.Maximum = 30;
+            this.trbPointerSize.Minimum = 3;
+            this.trbPointerSize.Name = "trbPointerSize";
+            this.trbPointerSize.Size = new System.Drawing.Size(121, 45);
+            this.trbPointerSize.TabIndex = 7;
+            this.trbPointerSize.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trbPointerSize.Value = 9;
+            this.trbPointerSize.ValueChanged += new System.EventHandler(this.trbSize_ValueChanged);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(216, 167);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.lblSize);
+            this.tabPage1.Controls.Add(this.cmbPointerAppearance);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.trbPointerOpacity);
+            this.tabPage1.Controls.Add(this.trbPointerSize);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lblOpacity);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(208, 141);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Pointer";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.nudFilterFixationThreshold);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.nudFilterWindowSize);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.nudFilterTHigh);
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.nudFilterTLow);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(208, 141);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Smoothing";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 86);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Fixation threshold";
+            // 
+            // nudFilterFixationThreshold
+            // 
+            this.nudFilterFixationThreshold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudFilterFixationThreshold.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudFilterFixationThreshold.Location = new System.Drawing.Point(121, 84);
+            this.nudFilterFixationThreshold.Minimum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nudFilterFixationThreshold.Name = "nudFilterFixationThreshold";
+            this.nudFilterFixationThreshold.Size = new System.Drawing.Size(81, 20);
+            this.nudFilterFixationThreshold.TabIndex = 6;
+            this.nudFilterFixationThreshold.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Window size (ms)";
+            // 
+            // nudFilterWindowSize
+            // 
+            this.nudFilterWindowSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudFilterWindowSize.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudFilterWindowSize.Location = new System.Drawing.Point(121, 58);
+            this.nudFilterWindowSize.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudFilterWindowSize.Minimum = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            this.nudFilterWindowSize.Name = "nudFilterWindowSize";
+            this.nudFilterWindowSize.Size = new System.Drawing.Size(81, 20);
+            this.nudFilterWindowSize.TabIndex = 4;
+            this.nudFilterWindowSize.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 34);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "T (saccade)";
+            // 
+            // nudFilterTHigh
+            // 
+            this.nudFilterTHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudFilterTHigh.Location = new System.Drawing.Point(121, 32);
+            this.nudFilterTHigh.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudFilterTHigh.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudFilterTHigh.Name = "nudFilterTHigh";
+            this.nudFilterTHigh.Size = new System.Drawing.Size(81, 20);
+            this.nudFilterTHigh.TabIndex = 2;
+            this.nudFilterTHigh.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "T (fixation)";
+            // 
+            // nudFilterTLow
+            // 
+            this.nudFilterTLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudFilterTLow.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudFilterTLow.Location = new System.Drawing.Point(121, 6);
+            this.nudFilterTLow.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudFilterTLow.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudFilterTLow.Name = "nudFilterTLow";
+            this.nudFilterTLow.Size = new System.Drawing.Size(81, 20);
+            this.nudFilterTLow.TabIndex = 0;
+            this.nudFilterTLow.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // Options
             // 
@@ -155,42 +362,54 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(284, 188);
-            this.Controls.Add(this.lblSize);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.trbSize);
+            this.ClientSize = new System.Drawing.Size(240, 220);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.lblOpacity);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.trbOpacity);
-            this.Controls.Add(this.cmbAppearance);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Options";
             this.Text = "GazeLaser Options";
-            ((System.ComponentModel.ISupportInitialize)(this.trbOpacity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trbSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterFixationThreshold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterWindowSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbAppearance;
-        private System.Windows.Forms.TrackBar trbOpacity;
+        private System.Windows.Forms.ComboBox cmbPointerAppearance;
+        private System.Windows.Forms.TrackBar trbPointerOpacity;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblOpacity;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TrackBar trbSize;
+        private System.Windows.Forms.TrackBar trbPointerSize;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown nudFilterTHigh;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nudFilterTLow;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nudFilterWindowSize;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nudFilterFixationThreshold;
 
     }
 }

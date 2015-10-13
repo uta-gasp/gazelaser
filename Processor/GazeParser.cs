@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace GazeLaser.Processor
 {
-    public class GazeParser
+    public class GazeParser : IDisposable
     {
         #region Consts
 
@@ -16,10 +16,9 @@ namespace GazeLaser.Processor
         #region Internal members
 
         private PointF iLastPoint = PointF.Empty;
-        private TwoLevelLowPassFilter iFilter = new TwoLevelLowPassFilter();
-
         private Queue<GazePoint> iPointBuffer = new Queue<GazePoint>();
         private System.Windows.Forms.Timer iPointsTimer = new System.Windows.Forms.Timer();
+        private bool iDisposed = false;
 
         #endregion
 
@@ -38,10 +37,18 @@ namespace GazeLaser.Processor
 
         #endregion
 
+        #region Properties
+
+        public TwoLevelLowPassFilter Filter { get; private set; }
+
+        #endregion
+
         #region Public methods
 
         public GazeParser()
         {
+            Filter = ObjectStorage<TwoLevelLowPassFilter>.load();
+
             iPointsTimer.Interval = SAMPLE_INTERVAL;
             iPointsTimer.Tick += PointsTimer_Tick;
         }
@@ -49,7 +56,7 @@ namespace GazeLaser.Processor
         public void start()
         {
             iLastPoint = PointF.Empty;
-            iFilter.reset(SAMPLE_INTERVAL);
+            Filter.reset(SAMPLE_INTERVAL);
 
             iPointBuffer.Clear();
             iPointsTimer.Start();
@@ -69,9 +76,28 @@ namespace GazeLaser.Processor
             }
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         #endregion
 
         #region Internal methods
+
+        protected virtual void Dispose(bool aDisposing)
+        {
+            if (iDisposed)
+                return;
+
+            if (aDisposing)
+            {
+                ObjectStorage<TwoLevelLowPassFilter>.save(Filter);
+            }
+
+            iDisposed = true;
+        }
 
         private void PointsTimer_Tick(object sender, EventArgs e)
         {
@@ -96,8 +122,9 @@ namespace GazeLaser.Processor
                 point.X /= bufferSize;
                 point.Y /= bufferSize;
 
-                GazePoint gazePoint = iFilter.feed(new GazePoint(timestamp, point));
-                OnNewGazePoint(this, new NewGazePointArgs(new Point(gazePoint.X, gazePoint.Y)));
+                GazePoint rawGazePoint = new GazePoint(timestamp, point);
+                GazePoint smoothedGazePoint = Filter.feed(rawGazePoint);
+                OnNewGazePoint(this, new NewGazePointArgs(new Point(smoothedGazePoint.X, smoothedGazePoint.Y)));
             }
         }
 

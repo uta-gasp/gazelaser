@@ -121,7 +121,7 @@ namespace GazeLaser
             iETUDriver.OnCalibrated += ETUDriver_OnCalibrated;
             iETUDriver.OnDataEvent += ETUDriver_OnDataEvent;
 
-            iGazeParser = ObjectStorage<Processor.GazeParser>.load();
+            iGazeParser = new Processor.GazeParser();
             iGazeParser.OnNewGazePoint += GazeParser_OnNewGazePoint;
 
             iPointer = new Pointer();
@@ -160,7 +160,7 @@ namespace GazeLaser
             {
                 // Free any other managed objects here.
                 iPointer.Dispose();
-                ObjectStorage<Processor.GazeParser>.save(iGazeParser);
+                iGazeParser.Dispose();
             }
 
             // Free any unmanaged objects here.
@@ -226,8 +226,10 @@ namespace GazeLaser
         private void Menu_OnShowOptions(object aSender, EventArgs aArgs)
         {
             UpdateMenu(true);
-            iOptions.load(iPointer);
-            iOptions.ShowDialog();
+            iOptions.load(iPointer, iGazeParser.Filter);
+            bool acceptChanges = iOptions.ShowDialog() == DialogResult.OK;
+            iOptions.save(acceptChanges);
+
             UpdateMenu(false);
         }
 

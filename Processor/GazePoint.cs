@@ -2,11 +2,12 @@
 
 namespace GazeLaser.Processor
 {
-    internal class GazePoint
+    public class GazePoint
     {
-        public int Timestamp;
-        public int X;
-        public int Y;
+        public int Timestamp { get; private set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
+
         public GazePoint(int aTimestamp, Point aPoint)
         {
             Timestamp = aTimestamp;

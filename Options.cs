@@ -5,7 +5,14 @@ namespace GazeLaser
 {
     public partial class Options : Form
     {
+        #region Internal members
+
         private Pointer iPointer;
+        private Processor.TwoLevelLowPassFilter iFilter;
+
+        #endregion
+
+        #region Public methods
 
         public Options()
         {
@@ -13,45 +20,61 @@ namespace GazeLaser
 
             foreach (Pointer.Style pointerStyle in Enum.GetValues(typeof(Pointer.Style)))
             {
-                cmbAppearance.Items.Add(pointerStyle);
+                cmbPointerAppearance.Items.Add(pointerStyle);
             }
         }
 
-        public void load(Pointer aPointer)
+        public void load(Pointer aPointer, Processor.TwoLevelLowPassFilter aFilter)
         {
             iPointer = aPointer;
+            iFilter = aFilter;
+
             iPointer.pushSettings();
 
-            cmbAppearance.SelectedItem = aPointer.Appearance;
-            trbOpacity.Value = (int)Math.Round(aPointer.Opacity * 10);
-            trbSize.Value = aPointer.Size / 10;
+            cmbPointerAppearance.SelectedItem = aPointer.Appearance;
+            trbPointerOpacity.Value = (int)Math.Round(aPointer.Opacity * 10);
+            trbPointerSize.Value = aPointer.Size / 10;
+
+            nudFilterTLow.Value = aFilter.TLow;
+            nudFilterTHigh.Value = aFilter.THigh;
+            nudFilterWindowSize.Value = aFilter.WindowSize;
+            nudFilterFixationThreshold.Value = aFilter.FixationThreshold;
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        public void save(bool aAccept)
         {
-            iPointer.popSettings(false);
+            iPointer.popSettings(!aAccept);
+            
+            if (aAccept)
+            {
+                iFilter.TLow = (int)nudFilterTLow.Value;
+                iFilter.THigh = (int)nudFilterTHigh.Value;
+                iFilter.WindowSize = (int)nudFilterWindowSize.Value;
+                iFilter.FixationThreshold = (int)nudFilterFixationThreshold.Value;
+            }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            iPointer.popSettings(true);
-        }
+        #endregion
+
+        #region Event handlers
 
         private void cmbAppearance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            iPointer.Appearance = (Pointer.Style)cmbAppearance.SelectedItem;
+            iPointer.Appearance = (Pointer.Style)cmbPointerAppearance.SelectedItem;
         }
 
         private void trbOpacity_ValueChanged(object sender, EventArgs e)
         {
-            lblOpacity.Text = (10 * trbOpacity.Value).ToString() + "%";
-            iPointer.Opacity = (double)trbOpacity.Value / 10;
+            lblOpacity.Text = (10 * trbPointerOpacity.Value).ToString() + "%";
+            iPointer.Opacity = (double)trbPointerOpacity.Value / 10;
         }
 
         private void trbSize_ValueChanged(object sender, EventArgs e)
         {
-            lblSize.Text = (10 * trbSize.Value).ToString() + " px";
-            iPointer.Size = trbSize.Value * 10;
+            lblSize.Text = (10 * trbPointerSize.Value).ToString() + " px";
+            iPointer.Size = trbPointerSize.Value * 10;
         }
+
+        #endregion
     }
 }

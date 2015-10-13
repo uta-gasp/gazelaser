@@ -23,5 +23,10 @@ namespace GazeLaser
             this.BackColor = Color.White;
             this.TransparencyKey = Color.White; 
         }
+
+        public void setImage(Bitmap aBitmap)
+        {
+            pcbImage.Image = aBitmap;
+        }
     }
 }

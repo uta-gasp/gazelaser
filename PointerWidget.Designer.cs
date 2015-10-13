@@ -28,7 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.pcbImage = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImage)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pcbImage
+            // 
+            this.pcbImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pcbImage.Location = new System.Drawing.Point(0, 0);
+            this.pcbImage.Margin = new System.Windows.Forms.Padding(0);
+            this.pcbImage.Name = "pcbImage";
+            this.pcbImage.Size = new System.Drawing.Size(100, 100);
+            this.pcbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbImage.TabIndex = 0;
+            this.pcbImage.TabStop = false;
             // 
             // PointerWidget
             // 
@@ -36,16 +49,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(100, 100);
+            this.Controls.Add(this.pcbImage);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PointerWidget";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Pointer";
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImage)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox pcbImage;
     }
 }

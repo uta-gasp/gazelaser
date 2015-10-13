@@ -13,7 +13,10 @@ namespace GazeLaser
             Spot,
             Circle,
             Ring,
-            Cross
+            Cross,
+            Dots,
+            Rect,
+            CorssAni
         }
 
         [Serializable]
@@ -76,7 +79,7 @@ namespace GazeLaser
                 iAppearance = value;
                 if (iStyleImages.ContainsKey(value))
                 {
-                    iWidget.BackgroundImage = iStyleImages[value];
+                    iWidget.setImage(iStyleImages[value]);
                 }
                 else
                 {
@@ -118,6 +121,9 @@ namespace GazeLaser
             iStyleImages.Add(Style.Circle, Properties.Resources.pointerCircle);
             iStyleImages.Add(Style.Ring, Properties.Resources.pointerRing);
             iStyleImages.Add(Style.Cross, Properties.Resources.pointerCross);
+            iStyleImages.Add(Style.Dots, Properties.Resources.pointerDots);
+            iStyleImages.Add(Style.Rect, Properties.Resources.pointerRect);
+            iStyleImages.Add(Style.CorssAni, Properties.Resources.pointerCrossAnim);
             
             iWidget = new PointerWidget();
 

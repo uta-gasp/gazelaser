@@ -12,7 +12,8 @@ namespace GazeLaser
         {
             Spot,
             Circle,
-            Ring
+            Ring,
+            Cross
         }
 
         [Serializable]
@@ -116,6 +117,7 @@ namespace GazeLaser
             iStyleImages.Add(Style.Spot, Properties.Resources.pointerSpot);
             iStyleImages.Add(Style.Circle, Properties.Resources.pointerCircle);
             iStyleImages.Add(Style.Ring, Properties.Resources.pointerRing);
+            iStyleImages.Add(Style.Cross, Properties.Resources.pointerCross);
             
             iWidget = new PointerWidget();
 

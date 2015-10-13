@@ -88,6 +88,7 @@ namespace GazeLaser
             iTrayIcon.Visible = true;
 
             Utils.GlobalShortcut.add(new Utils.Shortcut("Pointer", new Action(Shortcut_TogglePointer), Keys.Pause));
+            Utils.GlobalShortcut.add(new Utils.Shortcut("Tracking", new Action(Shortcut_TrackingNext), Keys.PrintScreen, Keys.Control));
             Utils.GlobalShortcut.init();
 
             UpdateMenu(false);
@@ -240,6 +241,18 @@ namespace GazeLaser
                 iPointer.hide();
             else
                 iPointer.show();
+        }
+
+        private void Shortcut_TrackingNext()
+        {
+            if (State == TrackingState.Disconnected)
+                showETUDOptions();
+            else if (State == TrackingState.Connected)
+                calibrate();
+            else if (State == TrackingState.Calibrated)
+                toggleTracking();
+            else if (State == TrackingState.Tracking)
+                toggleTracking();
         }
 
         #endregion

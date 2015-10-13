@@ -78,20 +78,20 @@
             this.cmbPointerAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbPointerAppearance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPointerAppearance.FormattingEnabled = true;
-            this.cmbPointerAppearance.Location = new System.Drawing.Point(81, 6);
+            this.cmbPointerAppearance.Location = new System.Drawing.Point(73, 6);
             this.cmbPointerAppearance.Name = "cmbPointerAppearance";
-            this.cmbPointerAppearance.Size = new System.Drawing.Size(121, 21);
+            this.cmbPointerAppearance.Size = new System.Drawing.Size(90, 21);
             this.cmbPointerAppearance.TabIndex = 1;
             this.cmbPointerAppearance.SelectedIndexChanged += new System.EventHandler(this.cmbAppearance_SelectedIndexChanged);
             // 
             // trbPointerOpacity
             // 
             this.trbPointerOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trbPointerOpacity.Location = new System.Drawing.Point(81, 33);
+            this.trbPointerOpacity.Location = new System.Drawing.Point(73, 33);
             this.trbPointerOpacity.Maximum = 9;
             this.trbPointerOpacity.Minimum = 1;
             this.trbPointerOpacity.Name = "trbPointerOpacity";
-            this.trbPointerOpacity.Size = new System.Drawing.Size(121, 45);
+            this.trbPointerOpacity.Size = new System.Drawing.Size(90, 45);
             this.trbPointerOpacity.TabIndex = 2;
             this.trbPointerOpacity.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trbPointerOpacity.Value = 9;
@@ -110,12 +110,11 @@
             // 
             this.lblOpacity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpacity.AutoSize = true;
-            this.lblOpacity.Location = new System.Drawing.Point(62, 47);
+            this.lblOpacity.Location = new System.Drawing.Point(169, 47);
             this.lblOpacity.Name = "lblOpacity";
             this.lblOpacity.Size = new System.Drawing.Size(13, 13);
             this.lblOpacity.TabIndex = 4;
             this.lblOpacity.Text = "0";
-            this.lblOpacity.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // btnOK
             // 
@@ -143,12 +142,11 @@
             // 
             this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(62, 98);
+            this.lblSize.Location = new System.Drawing.Point(169, 98);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(13, 13);
             this.lblSize.TabIndex = 9;
             this.lblSize.Text = "0";
-            this.lblSize.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
             // 
@@ -162,11 +160,11 @@
             // trbPointerSize
             // 
             this.trbPointerSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trbPointerSize.Location = new System.Drawing.Point(81, 84);
+            this.trbPointerSize.Location = new System.Drawing.Point(73, 84);
             this.trbPointerSize.Maximum = 30;
             this.trbPointerSize.Minimum = 3;
             this.trbPointerSize.Name = "trbPointerSize";
-            this.trbPointerSize.Size = new System.Drawing.Size(121, 45);
+            this.trbPointerSize.Size = new System.Drawing.Size(90, 45);
             this.trbPointerSize.TabIndex = 7;
             this.trbPointerSize.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trbPointerSize.Value = 9;

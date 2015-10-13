@@ -73,6 +73,16 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pointerCircleAnim {
+            get {
+                object obj = ResourceManager.GetObject("pointerCircleAnim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pointerCross {
             get {
                 object obj = ResourceManager.GetObject("pointerCross", resourceCulture);
@@ -96,6 +106,16 @@ namespace GazeLaser.Properties {
         internal static System.Drawing.Bitmap pointerDots {
             get {
                 object obj = ResourceManager.GetObject("pointerDots", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerDotsAnim {
+            get {
+                object obj = ResourceManager.GetObject("pointerDotsAnim", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

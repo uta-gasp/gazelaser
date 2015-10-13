@@ -16,7 +16,9 @@ namespace GazeLaser
             Cross,
             Dots,
             Rect,
-            CorssAni
+            CorssAnim,
+            DotsAnim,
+            CircleAnim
         }
 
         [Serializable]
@@ -123,7 +125,9 @@ namespace GazeLaser
             iStyleImages.Add(Style.Cross, Properties.Resources.pointerCross);
             iStyleImages.Add(Style.Dots, Properties.Resources.pointerDots);
             iStyleImages.Add(Style.Rect, Properties.Resources.pointerRect);
-            iStyleImages.Add(Style.CorssAni, Properties.Resources.pointerCrossAnim);
+            iStyleImages.Add(Style.CorssAnim, Properties.Resources.pointerCrossAnim);
+            iStyleImages.Add(Style.DotsAnim, Properties.Resources.pointerDotsAnim);
+            iStyleImages.Add(Style.CircleAnim, Properties.Resources.pointerCircleAnim);
             
             iWidget = new PointerWidget();
 

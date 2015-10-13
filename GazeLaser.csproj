@@ -103,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="img\pointerCircleAnim.gif" />
+    <None Include="img\pointerDotsAnim.gif" />
+    <None Include="img\pointerCrossAnim.gif" />
     <None Include="img\pointerCross.gif" />
     <None Include="img\pointerRect.png" />
     <None Include="img\pointerDots.png" />

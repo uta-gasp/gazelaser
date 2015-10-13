@@ -77,7 +77,7 @@ namespace GazeLaser
 
         public void update(TrackerState aTrackerState)
         {
-            tsmiOptions.Enabled = !aTrackerState.IsShowingOptions && !aTrackerState.IsTracking;
+            tsmiOptions.Enabled = !aTrackerState.IsShowingOptions;// && !aTrackerState.IsTracking;
             tsmiETUDOptions.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.HasDevices && !aTrackerState.IsTracking;
             tsmiETUDCalibrate.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && !aTrackerState.IsTracking;
             tsmiETUDToggleTracking.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && aTrackerState.IsCalibrated;

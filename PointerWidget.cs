@@ -11,7 +11,7 @@ namespace GazeLaser
             get
             {
                 CreateParams createParams = base.CreateParams;
-                createParams.ExStyle |= 0x00000020; // WS_EX_TRANSPARENT
+                createParams.ExStyle |= Utils.WinAPI.WS_EX.TRANSPARENT | Utils.WinAPI.WS_EX.TOOLWINDOW;
                 return createParams;
             }
         }
@@ -30,7 +30,7 @@ namespace GazeLaser
         }
 
         private void tmrPositionInspector_Tick(object sender, EventArgs e)
-        {   
+        {
             if (Visible)
             {
                 Utils.WinAPI.SetWindowPos(this.Handle, Utils.WinAPI.HWND.TOPMOST, 0, 0, 0, 0,

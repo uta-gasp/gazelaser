@@ -33,10 +33,8 @@ namespace GazeLaser
         {   
             if (Visible)
             {
-                Utils.WindowManager.SetWindowPos(this.Handle, Utils.WindowManager.Placement.TOPMOST, 0, 0, 0, 0,
-                    Utils.WindowManager.Options.NOMOVE | 
-                    Utils.WindowManager.Options.NOSIZE |
-                    Utils.WindowManager.Options.NOACTIVATE);
+                Utils.WinAPI.SetWindowPos(this.Handle, Utils.WinAPI.HWND.TOPMOST, 0, 0, 0, 0,
+                    Utils.WinAPI.SWP.NOMOVE | Utils.WinAPI.SWP.NOSIZE | Utils.WinAPI.SWP.NOACTIVATE);
             }
         }
     }

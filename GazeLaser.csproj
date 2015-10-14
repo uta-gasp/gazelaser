@@ -72,7 +72,7 @@
     <Compile Include="Utils\GlobalShortcut.cs" />
     <Compile Include="Utils\ObjectStorage.cs" />
     <Compile Include="Utils\Shortcut.cs" />
-    <Compile Include="Utils\WindowManager.cs" />
+    <Compile Include="Utils\WinAPI.cs" />
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>

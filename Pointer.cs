@@ -13,14 +13,20 @@ namespace GazeLaser
         public enum Style
         {
             Spot,
-            Circle,
-            Ring,
-            Cross,
+            CircleS,
+            CircleD,
+            CrossX,
+            CrossXT,
+            CrossP,
+            CrossPT,
             Dots,
-            Rect,
-            CrossAnim,
+            Frame,
+            Baloon,
+            CircleDAnim,
+            CircleSAnim,
+            CrossPAnim,
+            CrossPTAnim,
             DotsAnim,
-            CircleAnim
         }
 
         [Serializable]

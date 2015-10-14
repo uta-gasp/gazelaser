@@ -104,6 +104,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="img\pointerCircleSAnim.gif" />
+    <None Include="img\pointerCircleDAnim.gif" />
+    <None Include="img\pointerCircleS.png" />
+    <None Include="img\pointerCircleD.png" />
+    <None Include="img\pointerFrame.png" />
+    <None Include="img\pointerCrossPTAnim.gif" />
+    <None Include="img\pointerCrossPAnim.gif" />
+    <None Include="img\pointerCrossP.png" />
+    <None Include="img\pointerCrossPT.png" />
+    <None Include="img\pointerCrossXT.png" />
+    <None Include="img\pointerCrossX.png" />
+    <None Include="img\pointerPlusAnim.gif" />
+    <None Include="img\pointerCrossT.png" />
+    <None Include="img\pointerBaloon.png" />
     <None Include="img\pointerCircleAnim.gif" />
     <None Include="img\pointerDotsAnim.gif" />
     <None Include="img\pointerCrossAnim.gif" />

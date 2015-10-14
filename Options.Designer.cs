@@ -303,7 +303,7 @@
             this.nudFilterTHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.nudFilterTHigh.Location = new System.Drawing.Point(121, 32);
             this.nudFilterTHigh.Maximum = new decimal(new int[] {
-            20,
+            200,
             0,
             0,
             0});

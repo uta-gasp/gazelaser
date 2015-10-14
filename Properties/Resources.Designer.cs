@@ -63,9 +63,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircle {
+        internal static System.Drawing.Bitmap pointerBaloon {
             get {
-                object obj = ResourceManager.GetObject("pointerCircle", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerBaloon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircleAnim {
+        internal static System.Drawing.Bitmap pointerCircleD {
             get {
-                object obj = ResourceManager.GetObject("pointerCircleAnim", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCross {
+        internal static System.Drawing.Bitmap pointerCircleDAnim {
             get {
-                object obj = ResourceManager.GetObject("pointerCross", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleDAnim", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,79 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCrossAnim {
+        internal static System.Drawing.Bitmap pointerCircleS {
             get {
-                object obj = ResourceManager.GetObject("pointerCrossAnim", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCircleSAnim {
+            get {
+                object obj = ResourceManager.GetObject("pointerCircleSAnim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossP {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossPAnim {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossPAnim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossPT {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossPT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossPTAnim {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossPTAnim", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossX {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossX", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerCrossXT {
+            get {
+                object obj = ResourceManager.GetObject("pointerCrossXT", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,19 +193,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerRect {
+        internal static System.Drawing.Bitmap pointerFrame {
             get {
-                object obj = ResourceManager.GetObject("pointerRect", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pointerRing {
-            get {
-                object obj = ResourceManager.GetObject("pointerRing", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerFrame", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,9 +1,11 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-set base=%~n0
+set source=%~n0
+set source=%source:~0,-4%
+set target=%~n0
 
-del /F /Q "%base%.gif"
+del /F /Q "%target%.gif"
 
 for /L %%G in (2,2,90) do ( 
     set id=
@@ -17,12 +19,12 @@ for /L %%G in (2,2,90) do (
         )
     )
 
-    convert %base%.png -virtual-pixel transparent -distort SRT "50,50,%%G" "animated\%base%_!id!.png"
+    convert %source%.png -virtual-pixel transparent -distort SRT "50,50,%%G" "animated\%target%_!id!.png"
 )
 
-convert -delay 4 -loop 0 -dispose Background animated\%base%*.png %base%.gif
+convert -delay 4 -loop 0 -dispose Background animated\%target%*.png %target%.gif
 
-del /F /Q "animated\%base%*.png"
+del /F /Q "animated\%target%*.png"
 
 rem set param=
 rem for /L %%G in (2,2,10) do (

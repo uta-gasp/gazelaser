@@ -7,7 +7,8 @@ set target=%~n0
 
 del /F /Q "%target%.gif"
 
-for /L %%G in (3,3,45) do ( 
+set max=40
+for /L %%G in (0,1,%max%) do ( 
     set id=
     if %%G lss 10 (
         set id=00%%G
@@ -19,7 +20,9 @@ for /L %%G in (3,3,45) do (
         )
     )
 
-    convert %source%.png -virtual-pixel transparent -distort SRT "50,50,%%G" "animated\%target%_!id!.png"
+    set getScale=calc 0.85 + 0.15 * cos(6.2831853 * %%G / (%max% + 1^)^)
+    for /f "tokens=*" %%S IN ('!getScale!') DO set scale=%%S
+    convert %source%.png -virtual-pixel transparent -distort SRT "50,50 !scale! 0" "animated\%target%_!id!.png"
 )
 
 convert -delay 4 -loop 0 -dispose Background animated\%target%*.png %target%.gif

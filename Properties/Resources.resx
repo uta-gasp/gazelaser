@@ -118,17 +118,38 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pointerCircle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerBaloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerBaloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCircleAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircleAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleDAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleDAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCrossAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCrossAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCircleSAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleSAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossPAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossPAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossPT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossPT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossPTAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossPTAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossX" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossX.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerCrossXT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCrossXT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pointerDots" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerDots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,11 +157,8 @@
   <data name="pointerDotsAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerDotsAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerRect" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerRect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pointerRing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerRing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerFrame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pointerSpot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerSpot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

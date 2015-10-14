@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 
@@ -90,6 +89,8 @@ namespace GazeLaser.Utils
         #endregion
 
         #region Internal methods
+
+        private GlobalShortcut() { }
 
         private static IntPtr SetHook(LowLevelKeyboardProc proc)
         {

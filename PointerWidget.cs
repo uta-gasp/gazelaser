@@ -28,5 +28,16 @@ namespace GazeLaser
         {
             pcbImage.Image = aBitmap;
         }
+
+        private void tmrPositionInspector_Tick(object sender, EventArgs e)
+        {   
+            if (Visible)
+            {
+                Utils.WindowManager.SetWindowPos(this.Handle, Utils.WindowManager.Placement.TOPMOST, 0, 0, 0, 0,
+                    Utils.WindowManager.Options.NOMOVE | 
+                    Utils.WindowManager.Options.NOSIZE |
+                    Utils.WindowManager.Options.NOACTIVATE);
+            }
+        }
     }
 }

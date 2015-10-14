@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pcbImage = new System.Windows.Forms.PictureBox();
+            this.tmrPositionInspector = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pcbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,6 +44,12 @@
             this.pcbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbImage.TabIndex = 0;
             this.pcbImage.TabStop = false;
+            // 
+            // tmrPositionInspector
+            // 
+            this.tmrPositionInspector.Enabled = true;
+            this.tmrPositionInspector.Interval = 500;
+            this.tmrPositionInspector.Tick += new System.EventHandler(this.tmrPositionInspector_Tick);
             // 
             // PointerWidget
             // 
@@ -65,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pcbImage;
+        private System.Windows.Forms.Timer tmrPositionInspector;
     }
 }

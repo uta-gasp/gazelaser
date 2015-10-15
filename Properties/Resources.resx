@@ -121,17 +121,17 @@
   <data name="pointerBaloon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerBaloon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCircleD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircleD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleDashed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleDashed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCircleDAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircleDAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleDashedAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleDashedAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCircleS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircleS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleStripped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleStripped.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerCircleSAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerCircleSAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerCircleStrippedAnim" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerCircleStrippedAnim.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pointerCrossP" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerCrossP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,7 +160,16 @@
   <data name="pointerFrame" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\pointerFrame.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pointerSpot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\img\pointerSpot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pointerFrameRounded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerFrameRounded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerFrameRoundedDashed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerFrameRoundedDashed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerSpotDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerSpotDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pointerSpotLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\pointerSpotLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

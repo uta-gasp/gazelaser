@@ -7,7 +7,7 @@ set target=%~n0
 
 del /F /Q "%target%.gif"
 
-for /L %%G in (3,3,45) do ( 
+for /L %%G in (2,2,90) do ( 
     set id=
     if %%G lss 10 (
         set id=00%%G

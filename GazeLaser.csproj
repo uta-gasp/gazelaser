@@ -104,6 +104,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="img\pointerSpotDark.png" />
+    <None Include="img\pointerSpotLight.png" />
+    <None Include="img\pointerFrameRoundedDashed.png" />
+    <None Include="img\pointerFrameRounded.png" />
+    <None Include="img\pointerCircleStrippedAnim.gif" />
+    <None Include="img\pointerCircleStripped.png" />
+    <None Include="img\pointerCircleDashedAnim.gif" />
+    <None Include="img\pointerCircleDashed.png" />
     <None Include="img\pointerCircleSAnim.gif" />
     <None Include="img\pointerCircleDAnim.gif" />
     <None Include="img\pointerCircleS.png" />

@@ -73,9 +73,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircleD {
+        internal static System.Drawing.Bitmap pointerCircleDashed {
             get {
-                object obj = ResourceManager.GetObject("pointerCircleD", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleDashed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircleDAnim {
+        internal static System.Drawing.Bitmap pointerCircleDashedAnim {
             get {
-                object obj = ResourceManager.GetObject("pointerCircleDAnim", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleDashedAnim", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircleS {
+        internal static System.Drawing.Bitmap pointerCircleStripped {
             get {
-                object obj = ResourceManager.GetObject("pointerCircleS", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleStripped", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerCircleSAnim {
+        internal static System.Drawing.Bitmap pointerCircleStrippedAnim {
             get {
-                object obj = ResourceManager.GetObject("pointerCircleSAnim", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerCircleStrippedAnim", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +203,39 @@ namespace GazeLaser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pointerSpot {
+        internal static System.Drawing.Bitmap pointerFrameRounded {
             get {
-                object obj = ResourceManager.GetObject("pointerSpot", resourceCulture);
+                object obj = ResourceManager.GetObject("pointerFrameRounded", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerFrameRoundedDashed {
+            get {
+                object obj = ResourceManager.GetObject("pointerFrameRoundedDashed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerSpotDark {
+            get {
+                object obj = ResourceManager.GetObject("pointerSpotDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pointerSpotLight {
+            get {
+                object obj = ResourceManager.GetObject("pointerSpotLight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

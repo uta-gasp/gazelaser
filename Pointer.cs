@@ -12,18 +12,21 @@ namespace GazeLaser
         // should match image names (without the preceiding 'pointer')
         public enum Style
         {
-            Spot,
-            CircleS,
-            CircleD,
+            Baloon,
+            CircleDashed,
+            CircleStripped,
             CrossX,
             CrossXT,
             CrossP,
             CrossPT,
             Dots,
             Frame,
-            Baloon,
-            CircleDAnim,
-            CircleSAnim,
+            FrameRounded,
+            FrameRoundedDashed,
+            SpotLight,
+            SpotDark,
+            CircleDashedAnim,
+            CircleStrippedAnim,
             CrossPAnim,
             CrossPTAnim,
             DotsAnim,
@@ -39,7 +42,7 @@ namespace GazeLaser
             public Settings()
             {
                 // All default values must be set here explicitely
-                Appearance = Style.Spot;
+                Appearance = Style.FrameRoundedDashed;
                 Opacity = 0.3;
                 Size = 100;
             }

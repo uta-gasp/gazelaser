@@ -74,6 +74,7 @@ namespace GazeLaser
 
             iMenu = new Menu();
             iMenu.OnShowOptions += showOptions;
+            iMenu.OnToggleVisibility += toggleVisibility;
             iMenu.OnShowETUDOptions += showETUDOptions;
             iMenu.OnCalibrate += calibrate;
             iMenu.OnToggleTracking += toggleTracking;
@@ -110,6 +111,14 @@ namespace GazeLaser
             UpdateMenu(false);
         }
 
+        public void toggleVisibility()
+        {
+            if (iPointer.Visible)
+                iPointer.hide();
+            else
+                iPointer.show();
+        }
+
         public void showETUDOptions()
         {
             UpdateMenu(true);
@@ -128,6 +137,7 @@ namespace GazeLaser
         {
             if (iETUDriver.Active == 0)
             {
+                iPointer.VisilityFollowsDataAvailability = true;
                 iGazeParser.start();
                 iETUDriver.startTracking();
             }
@@ -135,6 +145,7 @@ namespace GazeLaser
             {
                 iETUDriver.stopTracking();
                 iGazeParser.stop();
+                iPointer.VisilityFollowsDataAvailability = false;
             }
         }
 
@@ -164,8 +175,9 @@ namespace GazeLaser
 
         private void UpdateMenu(bool aIsShowingDialog)
         {
-            Menu.TrackerState trackerState = new Menu.TrackerState();
+            Menu.State trackerState = new Menu.State();
             trackerState.IsShowingOptions = aIsShowingDialog;
+            trackerState.IsVisible = iPointer.Visible;
             trackerState.HasDevices = iETUDriver.DeviceCount > 0;
             trackerState.IsConnected = iETUDriver.Ready != 0;
             trackerState.IsCalibrated = iETUDriver.Calibrated != 0;
@@ -190,12 +202,17 @@ namespace GazeLaser
 
         private void ETUDriver_OnRecordingStart()
         {
+            if (AutoStarter.ShowPointer)
+                iPointer.show();
+
             UpdateMenu(false);
         }
 
         private void ETUDriver_OnRecordingStop()
         {
-            iPointer.hide();
+            if (AutoStarter.ShowPointer)
+                iPointer.hide();
+
             UpdateMenu(false);
 
             if (iExitAfterTrackingStopped)

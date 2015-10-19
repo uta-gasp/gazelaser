@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace GazeLaser
 {
@@ -38,6 +39,8 @@ namespace GazeLaser
             public Style Appearance { get; set; }
             public double Opacity { get; set; }
             public int Size { get; set; }
+            public long FadingInterval { get; set; }
+            public long NoDataVisibilityInterval { get; set; }
 
             public Settings()
             {
@@ -45,6 +48,8 @@ namespace GazeLaser
                 Appearance = Style.FrameRoundedDashed;
                 Opacity = 0.3;
                 Size = 100;
+                FadingInterval = 300;
+                NoDataVisibilityInterval = 1000;
             }
 
             public Settings(Pointer aPointer)
@@ -57,6 +62,8 @@ namespace GazeLaser
                 Appearance = aPointer.Appearance;
                 Opacity = aPointer.Opacity;
                 Size = aPointer.Size;
+                FadingInterval = aPointer.FadingInterval;
+                NoDataVisibilityInterval = aPointer.NoDataVisibilityInterval;
             }
 
             public void saveTo(Pointer aPointer)
@@ -64,6 +71,8 @@ namespace GazeLaser
                 aPointer.Appearance = Appearance;
                 aPointer.Opacity = Opacity;
                 aPointer.Size = Size;
+                aPointer.FadingInterval = FadingInterval;
+                aPointer.NoDataVisibilityInterval = NoDataVisibilityInterval;
             }
         }
 
@@ -77,6 +86,12 @@ namespace GazeLaser
 
         private PointerWidget iWidget;
         private Style iAppearance;
+        private double iOpacity;
+        private double iDataAvailability;
+
+        private long iLastDataTimestamp = 0;
+        private Libs.HiResTimestamp iHRTimestamp;
+        private Timer iDataAvailabilityTimer;
 
         #endregion
 
@@ -103,8 +118,12 @@ namespace GazeLaser
 
         public double Opacity
         {
-            get { return iWidget.Opacity; }
-            set { iWidget.Opacity = value; }
+            get { return iOpacity; }
+            set
+            {
+                iOpacity = value;
+                UpdateWidgetOpacity();
+            }
         }
 
         public int Size
@@ -117,12 +136,14 @@ namespace GazeLaser
             }
         }
 
+        public long FadingInterval { get; set; }
+
+        public long NoDataVisibilityInterval { get; set; }
+
         // Other
 
-        public bool Visible
-        {
-            get { return iWidget.Visible; }
-        }
+        public bool Visible { get { return iWidget.Visible; } }
+        public bool VisilityFollowsDataAvailability { get; set; }
 
         #endregion
 
@@ -134,6 +155,14 @@ namespace GazeLaser
 
             iWidget = new PointerWidget();
 
+            iDataAvailabilityTimer = new Timer();
+            iDataAvailabilityTimer.Interval = 30;
+            iDataAvailabilityTimer.Tick += DataAvailabilityTimer_Tick;
+
+            iHRTimestamp = new Libs.HiResTimestamp();
+
+            VisilityFollowsDataAvailability = false;
+
             Settings settings = Utils.ObjectStorage<Settings>.load();
             settings.saveTo(this);
         }
@@ -141,13 +170,20 @@ namespace GazeLaser
         public void show()
         {
             int size = Size;
+            iDataAvailability = 1.0;
+            UpdateWidgetOpacity();
             iWidget.Show();
             Size = size;
+
+            iDataAvailabilityTimer.Start();
+
+            iLastDataTimestamp = 0;
         }
 
         public void hide()
         {
             iWidget.Hide();
+            iDataAvailabilityTimer.Stop();
         }
 
         public void pushSettings()
@@ -171,6 +207,8 @@ namespace GazeLaser
 
         public void moveTo(Point aLocation)
         {
+            iLastDataTimestamp = iHRTimestamp.Milliseconds;
+
             if (iWidget.Visible)
             {
                 iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
@@ -182,6 +220,35 @@ namespace GazeLaser
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void DataAvailabilityTimer_Tick(object sender, EventArgs e)
+        {
+            double dataAvailability = VisilityFollowsDataAvailability ? -1.0 : 1.0;
+            if (VisilityFollowsDataAvailability)
+            {
+                long dataNotAvailableInterval = iHRTimestamp.Milliseconds - iLastDataTimestamp;
+                if (dataNotAvailableInterval > NoDataVisibilityInterval)
+                {
+                    dataAvailability = 1.0 - Math.Min(1.0, (double)(dataNotAvailableInterval - NoDataVisibilityInterval) / FadingInterval);
+                    Console.WriteLine(dataAvailability);
+                }
+                else
+                {
+                    double opacityIncreaseStep = (double)(iDataAvailabilityTimer.Interval) / FadingInterval;
+                    dataAvailability = Math.Min(1.0, iDataAvailability + opacityIncreaseStep);
+                }
+            }
+
+            if (dataAvailability != iDataAvailability)
+            {
+                iDataAvailability = dataAvailability;
+                UpdateWidgetOpacity();
+            }
         }
 
         #endregion
@@ -218,6 +285,11 @@ namespace GazeLaser
 
                 iStyleImages.Add(style, (Bitmap)image);
             }
+        }
+
+        private void UpdateWidgetOpacity()
+        {
+            iWidget.Opacity = iOpacity * iDataAvailability;
         }
 
         #endregion

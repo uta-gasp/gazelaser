@@ -10,10 +10,12 @@ namespace GazeLaser
         private bool iFinished = true;
 
         public bool Enabled { get; set; }
+        public bool ShowPointer { get; set; }
 
         public AutoStarter()
         {
             Enabled = false;
+            ShowPointer = true;
         }
 
         public void run(GazeLaser aGazeLaser)

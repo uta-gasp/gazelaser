@@ -7,9 +7,10 @@ namespace GazeLaser
     {
         #region Declarations
 
-        public struct TrackerState
+        public struct State
         {
             public bool IsShowingOptions;
+            public bool IsVisible;
             public bool HasDevices;
             public bool IsConnected;
             public bool IsCalibrated;
@@ -21,6 +22,7 @@ namespace GazeLaser
         #region Internal members
 
         private ToolStripMenuItem tsmiOptions;
+        private ToolStripMenuItem tsmiToggleVisibility;
         private ToolStripMenuItem tsmiETUDOptions;
         private ToolStripMenuItem tsmiETUDCalibrate;
         private ToolStripMenuItem tsmiETUDToggleTracking;
@@ -32,6 +34,7 @@ namespace GazeLaser
         #region Events
 
         public event Action OnShowOptions = delegate { };
+        public event Action OnToggleVisibility = delegate { };
         public event Action OnShowETUDOptions = delegate { };
         public event Action OnCalibrate = delegate { };
         public event Action OnToggleTracking = delegate { };
@@ -52,6 +55,9 @@ namespace GazeLaser
             tsmiOptions = new ToolStripMenuItem("Options");
             tsmiOptions.Click += new EventHandler((s, e) => OnShowOptions());
 
+            tsmiToggleVisibility = new ToolStripMenuItem("Show");
+            tsmiToggleVisibility.Click += new EventHandler((s, e) => OnToggleVisibility());
+
             tsmiETUDOptions = new ToolStripMenuItem("ETU-Driver");
             tsmiETUDOptions.Click += new EventHandler((s, e) => OnShowETUDOptions());
 
@@ -67,6 +73,7 @@ namespace GazeLaser
             cmsMenu = new ContextMenuStrip();
 
             cmsMenu.Items.Add(tsmiOptions);
+            cmsMenu.Items.Add(tsmiToggleVisibility);
             cmsMenu.Items.Add("-");
             cmsMenu.Items.Add(tsmiETUDOptions);
             cmsMenu.Items.Add(tsmiETUDCalibrate);
@@ -75,14 +82,15 @@ namespace GazeLaser
             cmsMenu.Items.Add(tsmiExit);
         }
 
-        public void update(TrackerState aTrackerState)
+        public void update(State aState)
         {
-            tsmiOptions.Enabled = !aTrackerState.IsShowingOptions;// && !aTrackerState.IsTracking;
-            tsmiETUDOptions.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.HasDevices && !aTrackerState.IsTracking;
-            tsmiETUDCalibrate.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && !aTrackerState.IsTracking;
-            tsmiETUDToggleTracking.Enabled = !aTrackerState.IsShowingOptions && aTrackerState.IsConnected && aTrackerState.IsCalibrated;
-            tsmiETUDToggleTracking.Text = aTrackerState.IsTracking ? "Stop" : "Start";
-            tsmiExit.Enabled = !aTrackerState.IsShowingOptions;
+            tsmiOptions.Enabled = !aState.IsShowingOptions;// && !aState.IsTracking;
+            tsmiToggleVisibility.Text = aState.IsVisible ? "Hide" : "Show";
+            tsmiETUDOptions.Enabled = !aState.IsShowingOptions && aState.HasDevices && !aState.IsTracking;
+            tsmiETUDCalibrate.Enabled = !aState.IsShowingOptions && aState.IsConnected && !aState.IsTracking;
+            tsmiETUDToggleTracking.Enabled = !aState.IsShowingOptions && aState.IsConnected && aState.IsCalibrated;
+            tsmiETUDToggleTracking.Text = aState.IsTracking ? "Stop" : "Start";
+            tsmiExit.Enabled = !aState.IsShowingOptions;
         }
 
         #endregion

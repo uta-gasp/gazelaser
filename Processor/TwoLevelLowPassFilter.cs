@@ -7,7 +7,7 @@ namespace GazeLaser.Processor
     [Serializable]
     public class TwoLevelLowPassFilter
     {
-        /*
+        /* Algorithm
         //----------------------------------------------------------------------------
         // _    SUM(X[i]), if TimeWindow <= (Time[i] - Time[n]) < 2*TimeWindow
         // Xb = --------------------------------------------------------------
@@ -86,7 +86,13 @@ namespace GazeLaser.Processor
 
             bool enoughPoints = UpdateBuffer(aGazePoint);
             iT = EstimateCurrentT(aGazePoint);
-            
+
+            if (!iEnoughPoints)
+            {
+                iX = aGazePoint.X;
+                iY = aGazePoint.Y;
+            }
+
             if (!iEnoughPoints && enoughPoints)
             {
                 iEnoughPoints = true;
@@ -126,11 +132,18 @@ namespace GazeLaser.Processor
         {
             bool isFilterValid = false;
             iBuffer.Enqueue(aGazePoint);
+            
             while (aGazePoint.Timestamp - iBuffer.Peek().Timestamp > (2 * WindowSize))
             {
                 iBuffer.Dequeue();
                 isFilterValid = true;
             }
+            
+            if (iBuffer.Count == 1)
+            {
+                iEnoughPoints = false;
+            }
+
             return isFilterValid && iBuffer.Count > 1;
         }
 

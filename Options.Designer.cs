@@ -52,6 +52,11 @@
             this.nudFilterTLow = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.chkAutoStarterEnabled = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nudPointerFadingInterval = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nudPointerNoDataVisibilityDuration = new System.Windows.Forms.NumericUpDown();
+            this.chkPointerAutoShowOnTrackingStart = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -62,6 +67,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -360,6 +367,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.chkPointerAutoShowOnTrackingStart);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.nudPointerNoDataVisibilityDuration);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.nudPointerFadingInterval);
             this.tabPage3.Controls.Add(this.chkAutoStarterEnabled);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -378,6 +390,90 @@
             this.chkAutoStarterEnabled.TabIndex = 0;
             this.chkAutoStarterEnabled.Text = "Auto-start tracking on start";
             this.chkAutoStarterEnabled.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(109, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Pointer fading interval";
+            // 
+            // nudPointerFadingInterval
+            // 
+            this.nudPointerFadingInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPointerFadingInterval.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Location = new System.Drawing.Point(121, 52);
+            this.nudPointerFadingInterval.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Name = "nudPointerFadingInterval";
+            this.nudPointerFadingInterval.Size = new System.Drawing.Size(81, 20);
+            this.nudPointerFadingInterval.TabIndex = 2;
+            this.nudPointerFadingInterval.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 80);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Data-less visibility";
+            // 
+            // nudPointerNoDataVisibilityDuration
+            // 
+            this.nudPointerNoDataVisibilityDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPointerNoDataVisibilityDuration.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPointerNoDataVisibilityDuration.Location = new System.Drawing.Point(121, 78);
+            this.nudPointerNoDataVisibilityDuration.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.nudPointerNoDataVisibilityDuration.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudPointerNoDataVisibilityDuration.Name = "nudPointerNoDataVisibilityDuration";
+            this.nudPointerNoDataVisibilityDuration.Size = new System.Drawing.Size(81, 20);
+            this.nudPointerNoDataVisibilityDuration.TabIndex = 4;
+            this.nudPointerNoDataVisibilityDuration.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // chkPointerAutoShowOnTrackingStart
+            // 
+            this.chkPointerAutoShowOnTrackingStart.AutoSize = true;
+            this.chkPointerAutoShowOnTrackingStart.Location = new System.Drawing.Point(6, 29);
+            this.chkPointerAutoShowOnTrackingStart.Name = "chkPointerAutoShowOnTrackingStart";
+            this.chkPointerAutoShowOnTrackingStart.Size = new System.Drawing.Size(190, 17);
+            this.chkPointerAutoShowOnTrackingStart.TabIndex = 6;
+            this.chkPointerAutoShowOnTrackingStart.Text = "Auto-show pointer on tracking start";
+            this.chkPointerAutoShowOnTrackingStart.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
@@ -408,6 +504,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -437,6 +535,11 @@
         private System.Windows.Forms.NumericUpDown nudFilterFixationThreshold;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.CheckBox chkAutoStarterEnabled;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nudPointerFadingInterval;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown nudPointerNoDataVisibilityDuration;
+        private System.Windows.Forms.CheckBox chkPointerAutoShowOnTrackingStart;
 
     }
 }

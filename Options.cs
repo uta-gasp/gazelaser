@@ -36,6 +36,8 @@ namespace GazeLaser
             cmbPointerAppearance.SelectedItem = aPointer.Appearance;
             trbPointerOpacity.Value = (int)Math.Round(aPointer.Opacity * 10);
             trbPointerSize.Value = aPointer.Size / 10;
+            nudPointerFadingInterval.Value = aPointer.FadingInterval;
+            nudPointerNoDataVisibilityDuration.Value = aPointer.NoDataVisibilityInterval;
 
             nudFilterTLow.Value = aFilter.TLow;
             nudFilterTHigh.Value = aFilter.THigh;
@@ -43,6 +45,7 @@ namespace GazeLaser
             nudFilterFixationThreshold.Value = aFilter.FixationThreshold;
 
             chkAutoStarterEnabled.Checked = iAutoStarter.Enabled;
+            chkPointerAutoShowOnTrackingStart.Checked = iAutoStarter.ShowPointer;
         }
 
         public void save(bool aAccept)
@@ -56,7 +59,11 @@ namespace GazeLaser
                 iFilter.WindowSize = (int)nudFilterWindowSize.Value;
                 iFilter.FixationThreshold = (int)nudFilterFixationThreshold.Value;
 
+                iPointer.FadingInterval = (long)nudPointerFadingInterval.Value;
+                iPointer.NoDataVisibilityInterval = (long)nudPointerNoDataVisibilityDuration.Value;
+
                 iAutoStarter.Enabled = chkAutoStarterEnabled.Checked;
+                iAutoStarter.ShowPointer = chkPointerAutoShowOnTrackingStart.Checked;
             }
         }
 

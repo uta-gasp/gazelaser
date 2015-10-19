@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoStarter.cs" />
+    <Compile Include="Libs\HiResTimestamp.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Processor\TwoLevelLowPassFilter.cs" />
     <Compile Include="GazeLaser.cs" />
@@ -112,10 +113,6 @@
     <None Include="img\pointerCircleStripped.png" />
     <None Include="img\pointerCircleDashedAnim.gif" />
     <None Include="img\pointerCircleDashed.png" />
-    <None Include="img\pointerCircleSAnim.gif" />
-    <None Include="img\pointerCircleDAnim.gif" />
-    <None Include="img\pointerCircleS.png" />
-    <None Include="img\pointerCircleD.png" />
     <None Include="img\pointerFrame.png" />
     <None Include="img\pointerCrossPTAnim.gif" />
     <None Include="img\pointerCrossPAnim.gif" />
@@ -123,19 +120,9 @@
     <None Include="img\pointerCrossPT.png" />
     <None Include="img\pointerCrossXT.png" />
     <None Include="img\pointerCrossX.png" />
-    <None Include="img\pointerPlusAnim.gif" />
-    <None Include="img\pointerCrossT.png" />
     <None Include="img\pointerBaloon.png" />
-    <None Include="img\pointerCircleAnim.gif" />
     <None Include="img\pointerDotsAnim.gif" />
-    <None Include="img\pointerCrossAnim.gif" />
-    <None Include="img\pointerCross.gif" />
-    <None Include="img\pointerRect.png" />
     <None Include="img\pointerDots.png" />
-    <None Include="img\pointerCross.png" />
-    <None Include="img\pointerRing.png" />
-    <None Include="img\pointerCircle.png" />
-    <None Include="img\pointerSpot.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ETUDriver">

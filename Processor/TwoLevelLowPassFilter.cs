@@ -151,10 +151,10 @@ namespace GazeLaser.Processor
         {
             int result = iT;
 
-            int avgXB = 0;
-            int avgYB = 0;
-            int avgXA = 0;
-            int avgYA = 0;
+            double avgXB = 0;
+            double avgYB = 0;
+            double avgXA = 0;
+            double avgYA = 0;
             int ptsBeforeCount = 0;
             int ptsAfterCount = 0;
 

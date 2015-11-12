@@ -1,11 +1,33 @@
 ﻿using System;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace GazeLaser.Utils
 {
-    public sealed class ObjectStorage<T>
+    public sealed class Storage
+    {
+        public static string Folder
+        {
+            get
+            {
+                AssemblyInfo assemblyInfo = new AssemblyInfo();
+                var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                    Path.DirectorySeparatorChar + assemblyInfo.Company +
+                    Path.DirectorySeparatorChar + assemblyName +
+                    Path.DirectorySeparatorChar;
+
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+
+                return folder;
+            }
+        }
+    }
+
+    public sealed class Storage<T>
     {
         private static string sOptionsFileExtension = ".xml";
 
@@ -17,7 +39,7 @@ namespace GazeLaser.Utils
             }
 
             Type type = typeof(T);
-            string fileName = GetShortName(type.ToString()) + sOptionsFileExtension;
+            string fileName = GetFilePath(type.ToString()) + sOptionsFileExtension;
             
             try
             {
@@ -36,7 +58,7 @@ namespace GazeLaser.Utils
         {
             T result = default(T);
             Type type = typeof(T);
-            string fileName = string.IsNullOrEmpty(aFileName) ? GetShortName(type.ToString()) + sOptionsFileExtension : aFileName;
+            string fileName = string.IsNullOrEmpty(aFileName) ? GetFilePath(type.ToString()) + sOptionsFileExtension : aFileName;
 
             try
             {
@@ -54,12 +76,13 @@ namespace GazeLaser.Utils
             return result;
         }
 
-        private ObjectStorage() { }
+        private Storage() { }
 
-        private static string GetShortName(string aTypeName)
+        private static string GetFilePath(string aTypeName)
         {
-            string[] parts = aTypeName.ToString().Split('.', '+');
-            return parts[parts.Length - 1];
+            return Storage.Folder + aTypeName.Replace('+', '.');
+            //string[] parts = aTypeName.ToString().Split('.', '+');
+            //return parts[parts.Length - 1];
         }
     }
 }

@@ -25,8 +25,8 @@ namespace GazeLaser.Processor
 
         public class NewGazePointArgs : EventArgs
         {
-            public Point Location { get; private set; }
-            public NewGazePointArgs(Point aLocation)
+            public PointF Location { get; private set; }
+            public NewGazePointArgs(PointF aLocation)
             {
                 Location = aLocation;
             }
@@ -46,7 +46,7 @@ namespace GazeLaser.Processor
 
         public GazeParser()
         {
-            Filter = Utils.ObjectStorage<TwoLevelLowPassFilter>.load();
+            Filter = Utils.Storage<TwoLevelLowPassFilter>.load();
 
             iPointsTimer.Interval = SAMPLE_INTERVAL;
             iPointsTimer.Tick += PointsTimer_Tick;
@@ -66,12 +66,14 @@ namespace GazeLaser.Processor
             iPointsTimer.Stop();
         }
 
-        public void feed(int aTimestamp, int aX, int aY)
+        public void feed(int aTimestamp, PointF aGazePoint)
         {
-            Point gazePoint = new Point(aX, aY);
+            if (aGazePoint.X <= 0 && aGazePoint.Y <= 0)
+                return;
+
             lock (iPointBuffer)
             {
-                iPointBuffer.Enqueue(new GazePoint(aTimestamp, gazePoint));
+                iPointBuffer.Enqueue(new GazePoint(aTimestamp, aGazePoint));
             }
         }
 
@@ -92,7 +94,7 @@ namespace GazeLaser.Processor
 
             if (aDisposing)
             {
-                Utils.ObjectStorage<TwoLevelLowPassFilter>.save(Filter);
+                Utils.Storage<TwoLevelLowPassFilter>.save(Filter);
             }
 
             iDisposed = true;
@@ -101,7 +103,7 @@ namespace GazeLaser.Processor
         private void PointsTimer_Tick(object sender, EventArgs e)
         {
             int timestamp = 0;
-            Point point = new Point(0, 0);
+            PointF point = new PointF(0, 0);
             int bufferSize = 0;
 
             lock (iPointBuffer)
@@ -122,8 +124,8 @@ namespace GazeLaser.Processor
                 point.Y /= bufferSize;
 
                 GazePoint rawGazePoint = new GazePoint(timestamp, point);
-                GazePoint smoothedGazePoint = Filter.feed(rawGazePoint);
-                OnNewGazePoint(this, new NewGazePointArgs(new Point(smoothedGazePoint.X, smoothedGazePoint.Y)));
+                GazePoint smoothed = Filter.feed(rawGazePoint);
+                OnNewGazePoint(this, new NewGazePointArgs(smoothed.Point));
             }
         }
 

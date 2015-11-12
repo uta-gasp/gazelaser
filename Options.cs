@@ -9,6 +9,7 @@ namespace GazeLaser
 
         private Pointer iPointer;
         private Processor.TwoLevelLowPassFilter iFilter;
+        private Processor.HeadCorrector iHeadCorrector;
         private AutoStarter iAutoStarter;
 
         #endregion
@@ -25,11 +26,13 @@ namespace GazeLaser
             }
         }
 
-        public void load(Pointer aPointer, Processor.TwoLevelLowPassFilter aFilter, AutoStarter aAutoStarter)
+        public void load(Pointer aPointer, Processor.TwoLevelLowPassFilter aFilter, 
+            Processor.HeadCorrector aHeadCorrector, AutoStarter aAutoStarter)
         {
             iPointer = aPointer;
             iFilter = aFilter;
             iAutoStarter = aAutoStarter;
+            iHeadCorrector = aHeadCorrector;
 
             iPointer.pushSettings();
 
@@ -46,6 +49,9 @@ namespace GazeLaser
 
             chkAutoStarterEnabled.Checked = iAutoStarter.Enabled;
             chkPointerAutoShowOnTrackingStart.Checked = iAutoStarter.ShowPointer;
+
+            chkHeadCorrection.Checked = iHeadCorrector.Enabled;
+            nudHeadCorrectionFactor.Value = iHeadCorrector.Factor;
         }
 
         public void save(bool aAccept)
@@ -64,6 +70,9 @@ namespace GazeLaser
 
                 iAutoStarter.Enabled = chkAutoStarterEnabled.Checked;
                 iAutoStarter.ShowPointer = chkPointerAutoShowOnTrackingStart.Checked;
+
+                iHeadCorrector.Enabled = chkHeadCorrection.Checked;
+                iHeadCorrector.Factor = (int)nudHeadCorrectionFactor.Value;
             }
         }
 

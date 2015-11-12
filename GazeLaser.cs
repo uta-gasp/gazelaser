@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using ETUDriver;
 
@@ -20,6 +21,7 @@ namespace GazeLaser
 
         private CoETUDriver iETUDriver;
         private Processor.GazeParser iGazeParser;
+        private Processor.HeadCorrector iHeadCorrector;
         private Pointer iPointer;
         private Menu iMenu;
         private Options iOptions;
@@ -58,10 +60,10 @@ namespace GazeLaser
 
         public GazeLaser()
         {
-            AutoStarter = Utils.ObjectStorage<AutoStarter>.load();
+            AutoStarter = Utils.Storage<AutoStarter>.load();
 
             iETUDriver = new CoETUDriver();
-            iETUDriver.OptionsFile = Application.StartupPath + "\\etudriver.ini";
+            iETUDriver.OptionsFile = Utils.Storage.Folder + "etudriver.ini";
             iETUDriver.OnRecordingStart += ETUDriver_OnRecordingStart;
             iETUDriver.OnRecordingStop += ETUDriver_OnRecordingStop;
             iETUDriver.OnCalibrated += ETUDriver_OnCalibrated;
@@ -70,7 +72,11 @@ namespace GazeLaser
             iGazeParser = new Processor.GazeParser();
             iGazeParser.OnNewGazePoint += GazeParser_OnNewGazePoint;
 
+            iHeadCorrector = Utils.Storage<Processor.HeadCorrector>.load();
+
             iPointer = new Pointer();
+            iPointer.OnShow += Pointer_OnShow;
+            iPointer.OnHide += Pointer_OnHide;
 
             iMenu = new Menu();
             iMenu.OnShowOptions += showOptions;
@@ -104,7 +110,7 @@ namespace GazeLaser
         private void showOptions()
         {
             UpdateMenu(true);
-            iOptions.load(iPointer, iGazeParser.Filter, AutoStarter);
+            iOptions.load(iPointer, iGazeParser.Filter, iHeadCorrector, AutoStarter);
             bool acceptChanges = iOptions.ShowDialog() == DialogResult.OK;
             iOptions.save(acceptChanges);
 
@@ -138,6 +144,7 @@ namespace GazeLaser
             if (iETUDriver.Active == 0)
             {
                 iPointer.VisilityFollowsDataAvailability = true;
+                iHeadCorrector.start(iETUDriver.Name);
                 iGazeParser.start();
                 iETUDriver.startTracking();
             }
@@ -145,6 +152,7 @@ namespace GazeLaser
             {
                 iETUDriver.stopTracking();
                 iGazeParser.stop();
+                iHeadCorrector.stop();
                 iPointer.VisilityFollowsDataAvailability = false;
             }
         }
@@ -163,7 +171,8 @@ namespace GazeLaser
                 // Free any other managed objects here.
                 iPointer.Dispose();
                 iGazeParser.Dispose();
-                Utils.ObjectStorage<AutoStarter>.save(AutoStarter);
+                Utils.Storage<AutoStarter>.save(AutoStarter);
+                Utils.Storage<Processor.HeadCorrector>.save(iHeadCorrector);
                 Utils.GlobalShortcut.close();
             }
 
@@ -226,7 +235,11 @@ namespace GazeLaser
             if (aEventID == EiETUDGazeEvent.geSample)
             {
                 SiETUDSample smp = iETUDriver.LastSample;
-                iGazeParser.feed(smp.Time, (int)smp.X[0], (int)smp.Y[0]);
+                iHeadCorrector.feed(smp);
+
+                PointF gazePoint = new PointF(smp.X[0], smp.Y[0]);
+                gazePoint = iHeadCorrector.correct(gazePoint);
+                iGazeParser.feed(smp.Time, gazePoint);
             }
         }
 
@@ -250,6 +263,16 @@ namespace GazeLaser
         private void GazeParser_OnNewGazePoint(object aSender, Processor.GazeParser.NewGazePointArgs aArgs)
         {
             iPointer.moveTo(aArgs.Location);
+        }
+
+        private void Pointer_OnHide(object aSender, EventArgs aArgs)
+        {
+            iHeadCorrector.stop();
+        }
+
+        private void Pointer_OnShow(object aSender, EventArgs aArgs)
+        {
+            iHeadCorrector.start(iETUDriver.Name);
         }
 
         private void Shortcut_TogglePointer()

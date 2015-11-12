@@ -51,12 +51,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nudFilterTLow = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.chkAutoStarterEnabled = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nudPointerFadingInterval = new System.Windows.Forms.NumericUpDown();
+            this.chkHeadCorrection = new System.Windows.Forms.CheckBox();
+            this.chkPointerAutoShowOnTrackingStart = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.nudPointerNoDataVisibilityDuration = new System.Windows.Forms.NumericUpDown();
-            this.chkPointerAutoShowOnTrackingStart = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nudPointerFadingInterval = new System.Windows.Forms.NumericUpDown();
+            this.chkAutoStarterEnabled = new System.Windows.Forms.CheckBox();
+            this.nudHeadCorrectionFactor = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -67,8 +70,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -127,7 +131,7 @@
             // 
             this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(31, 185);
+            this.btnOK.Location = new System.Drawing.Point(31, 194);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 5;
@@ -138,7 +142,7 @@
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(113, 185);
+            this.btnCancel.Location = new System.Drawing.Point(113, 194);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
@@ -188,7 +192,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(216, 167);
+            this.tabControl1.Size = new System.Drawing.Size(216, 176);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
@@ -367,6 +371,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.nudHeadCorrectionFactor);
+            this.tabPage3.Controls.Add(this.chkHeadCorrection);
             this.tabPage3.Controls.Add(this.chkPointerAutoShowOnTrackingStart);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.nudPointerNoDataVisibilityDuration);
@@ -376,57 +383,30 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(208, 141);
+            this.tabPage3.Size = new System.Drawing.Size(208, 150);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Misc";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // chkAutoStarterEnabled
+            // chkHeadCorrection
             // 
-            this.chkAutoStarterEnabled.AutoSize = true;
-            this.chkAutoStarterEnabled.Location = new System.Drawing.Point(6, 6);
-            this.chkAutoStarterEnabled.Name = "chkAutoStarterEnabled";
-            this.chkAutoStarterEnabled.Size = new System.Drawing.Size(150, 17);
-            this.chkAutoStarterEnabled.TabIndex = 0;
-            this.chkAutoStarterEnabled.Text = "Auto-start tracking on start";
-            this.chkAutoStarterEnabled.UseVisualStyleBackColor = true;
+            this.chkHeadCorrection.AutoSize = true;
+            this.chkHeadCorrection.Location = new System.Drawing.Point(6, 104);
+            this.chkHeadCorrection.Name = "chkHeadCorrection";
+            this.chkHeadCorrection.Size = new System.Drawing.Size(102, 17);
+            this.chkHeadCorrection.TabIndex = 7;
+            this.chkHeadCorrection.Text = "Head correction";
+            this.chkHeadCorrection.UseVisualStyleBackColor = true;
             // 
-            // label8
+            // chkPointerAutoShowOnTrackingStart
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 54);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 13);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Pointer fading interval";
-            // 
-            // nudPointerFadingInterval
-            // 
-            this.nudPointerFadingInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudPointerFadingInterval.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudPointerFadingInterval.Location = new System.Drawing.Point(121, 52);
-            this.nudPointerFadingInterval.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudPointerFadingInterval.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudPointerFadingInterval.Name = "nudPointerFadingInterval";
-            this.nudPointerFadingInterval.Size = new System.Drawing.Size(81, 20);
-            this.nudPointerFadingInterval.TabIndex = 2;
-            this.nudPointerFadingInterval.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
+            this.chkPointerAutoShowOnTrackingStart.AutoSize = true;
+            this.chkPointerAutoShowOnTrackingStart.Location = new System.Drawing.Point(6, 29);
+            this.chkPointerAutoShowOnTrackingStart.Name = "chkPointerAutoShowOnTrackingStart";
+            this.chkPointerAutoShowOnTrackingStart.Size = new System.Drawing.Size(190, 17);
+            this.chkPointerAutoShowOnTrackingStart.TabIndex = 6;
+            this.chkPointerAutoShowOnTrackingStart.Text = "Auto-show pointer on tracking start";
+            this.chkPointerAutoShowOnTrackingStart.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -465,15 +445,84 @@
             0,
             0});
             // 
-            // chkPointerAutoShowOnTrackingStart
+            // label8
             // 
-            this.chkPointerAutoShowOnTrackingStart.AutoSize = true;
-            this.chkPointerAutoShowOnTrackingStart.Location = new System.Drawing.Point(6, 29);
-            this.chkPointerAutoShowOnTrackingStart.Name = "chkPointerAutoShowOnTrackingStart";
-            this.chkPointerAutoShowOnTrackingStart.Size = new System.Drawing.Size(190, 17);
-            this.chkPointerAutoShowOnTrackingStart.TabIndex = 6;
-            this.chkPointerAutoShowOnTrackingStart.Text = "Auto-show pointer on tracking start";
-            this.chkPointerAutoShowOnTrackingStart.UseVisualStyleBackColor = true;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(109, 13);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Pointer fading interval";
+            // 
+            // nudPointerFadingInterval
+            // 
+            this.nudPointerFadingInterval.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudPointerFadingInterval.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Location = new System.Drawing.Point(121, 52);
+            this.nudPointerFadingInterval.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPointerFadingInterval.Name = "nudPointerFadingInterval";
+            this.nudPointerFadingInterval.Size = new System.Drawing.Size(81, 20);
+            this.nudPointerFadingInterval.TabIndex = 2;
+            this.nudPointerFadingInterval.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // chkAutoStarterEnabled
+            // 
+            this.chkAutoStarterEnabled.AutoSize = true;
+            this.chkAutoStarterEnabled.Location = new System.Drawing.Point(6, 6);
+            this.chkAutoStarterEnabled.Name = "chkAutoStarterEnabled";
+            this.chkAutoStarterEnabled.Size = new System.Drawing.Size(150, 17);
+            this.chkAutoStarterEnabled.TabIndex = 0;
+            this.chkAutoStarterEnabled.Text = "Auto-start tracking on start";
+            this.chkAutoStarterEnabled.UseVisualStyleBackColor = true;
+            // 
+            // nudHeadCorrectionFactor
+            // 
+            this.nudHeadCorrectionFactor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudHeadCorrectionFactor.Location = new System.Drawing.Point(121, 122);
+            this.nudHeadCorrectionFactor.Maximum = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
+            this.nudHeadCorrectionFactor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHeadCorrectionFactor.Name = "nudHeadCorrectionFactor";
+            this.nudHeadCorrectionFactor.Size = new System.Drawing.Size(81, 20);
+            this.nudHeadCorrectionFactor.TabIndex = 8;
+            this.nudHeadCorrectionFactor.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(26, 124);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 13);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "factor";
             // 
             // Options
             // 
@@ -481,7 +530,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(240, 220);
+            this.ClientSize = new System.Drawing.Size(240, 229);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -504,8 +553,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -540,7 +590,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudPointerNoDataVisibilityDuration;
         private System.Windows.Forms.CheckBox chkPointerAutoShowOnTrackingStart;
-
+        private System.Windows.Forms.CheckBox chkHeadCorrection;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudHeadCorrectionFactor;
     }
 }
 

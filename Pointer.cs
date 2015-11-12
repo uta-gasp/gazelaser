@@ -147,6 +147,13 @@ namespace GazeLaser
 
         #endregion
 
+        #region Events
+
+        public event EventHandler OnHide = delegate { };
+        public event EventHandler OnShow = delegate { };
+
+        #endregion
+
         #region Public methods
 
         public Pointer()
@@ -163,7 +170,7 @@ namespace GazeLaser
 
             VisilityFollowsDataAvailability = false;
 
-            Settings settings = Utils.ObjectStorage<Settings>.load();
+            Settings settings = Utils.Storage<Settings>.load();
             settings.saveTo(this);
         }
 
@@ -205,13 +212,13 @@ namespace GazeLaser
             }
         }
 
-        public void moveTo(Point aLocation)
+        public void moveTo(PointF aLocation)
         {
             iLastDataTimestamp = iHRTimestamp.Milliseconds;
 
             if (iWidget.Visible)
             {
-                iWidget.Location = new Point(aLocation.X - iWidget.Width / 2, aLocation.Y - iWidget.Height / 2);
+                iWidget.Location = new Point((int)(aLocation.X - iWidget.Width / 2), (int)(aLocation.Y - iWidget.Height / 2));
             }
         }
 
@@ -248,6 +255,15 @@ namespace GazeLaser
             {
                 iDataAvailability = dataAvailability;
                 UpdateWidgetOpacity();
+
+                if (iDataAvailability == 0.0)
+                {
+                    OnHide(this, new EventArgs());
+                }
+                else if (iDataAvailability == 1.0)
+                {
+                    OnShow(this, new EventArgs());
+                }
             }
         }
 
@@ -263,7 +279,7 @@ namespace GazeLaser
             if (aDisposing)
             {
                 Settings settings = new Settings(this);
-                Utils.ObjectStorage<Settings>.save(settings);
+                Utils.Storage<Settings>.save(settings);
             }
 
             iDisposed = true;

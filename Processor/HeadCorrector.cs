@@ -28,7 +28,7 @@ namespace GazeLaser.Processor
         #region Properties
 
         public bool Enabled { get; set; } = false;
-        public int Factor { get; set; } = 500;
+        public double Factor { get; set; } = 1.0;
 
         [System.Xml.Serialization.XmlIgnore]
         public bool IsTuning { get; private set; } = false;
@@ -65,8 +65,8 @@ namespace GazeLaser.Processor
                 else
                 {
                     iOffset = new PointF(
-                        (eyePos.X - iReference.X) * Factor,
-                        (eyePos.Y - iReference.Y) * Factor);
+                        (float)((eyePos.X - iReference.X) * Factor),
+                        (float)((eyePos.Y - iReference.Y) * Factor));
                 }
             }
         }

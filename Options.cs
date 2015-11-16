@@ -51,7 +51,7 @@ namespace GazeLaser
             chkPointerAutoShowOnTrackingStart.Checked = iAutoStarter.ShowPointer;
 
             chkHeadCorrection.Checked = iHeadCorrector.Enabled;
-            nudHeadCorrectionFactor.Value = iHeadCorrector.Factor;
+            nudHeadCorrectionFactor.Value = (decimal)iHeadCorrector.Factor;
         }
 
         public void save(bool aAccept)

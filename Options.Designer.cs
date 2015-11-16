@@ -51,6 +51,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nudFilterTLow = new System.Windows.Forms.NumericUpDown();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudHeadCorrectionFactor = new System.Windows.Forms.NumericUpDown();
             this.chkHeadCorrection = new System.Windows.Forms.CheckBox();
             this.chkPointerAutoShowOnTrackingStart = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -58,8 +60,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.nudPointerFadingInterval = new System.Windows.Forms.NumericUpDown();
             this.chkAutoStarterEnabled = new System.Windows.Forms.CheckBox();
-            this.nudHeadCorrectionFactor = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerOpacity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trbPointerSize)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -70,9 +70,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTHigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -208,7 +208,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(208, 141);
+            this.tabPage1.Size = new System.Drawing.Size(208, 150);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Pointer";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(208, 141);
+            this.tabPage2.Size = new System.Drawing.Size(208, 150);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Smoothing";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -388,6 +388,44 @@
             this.tabPage3.Text = "Misc";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(26, 124);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(34, 13);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "factor";
+            // 
+            // nudHeadCorrectionFactor
+            // 
+            this.nudHeadCorrectionFactor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudHeadCorrectionFactor.DecimalPlaces = 1;
+            this.nudHeadCorrectionFactor.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHeadCorrectionFactor.Location = new System.Drawing.Point(121, 122);
+            this.nudHeadCorrectionFactor.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudHeadCorrectionFactor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.nudHeadCorrectionFactor.Name = "nudHeadCorrectionFactor";
+            this.nudHeadCorrectionFactor.Size = new System.Drawing.Size(81, 20);
+            this.nudHeadCorrectionFactor.TabIndex = 8;
+            this.nudHeadCorrectionFactor.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // chkHeadCorrection
             // 
             this.chkHeadCorrection.AutoSize = true;
@@ -492,38 +530,6 @@
             this.chkAutoStarterEnabled.Text = "Auto-start tracking on start";
             this.chkAutoStarterEnabled.UseVisualStyleBackColor = true;
             // 
-            // nudHeadCorrectionFactor
-            // 
-            this.nudHeadCorrectionFactor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nudHeadCorrectionFactor.Location = new System.Drawing.Point(121, 122);
-            this.nudHeadCorrectionFactor.Maximum = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
-            this.nudHeadCorrectionFactor.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudHeadCorrectionFactor.Name = "nudHeadCorrectionFactor";
-            this.nudHeadCorrectionFactor.Size = new System.Drawing.Size(81, 20);
-            this.nudHeadCorrectionFactor.TabIndex = 8;
-            this.nudHeadCorrectionFactor.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(26, 124);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(34, 13);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "factor";
-            // 
             // Options
             // 
             this.AcceptButton = this.btnOK;
@@ -553,9 +559,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudFilterTLow)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerNoDataVisibilityDuration)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointerFadingInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudHeadCorrectionFactor)).EndInit();
             this.ResumeLayout(false);
 
         }

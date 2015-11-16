@@ -144,7 +144,6 @@ namespace GazeLaser
             if (iETUDriver.Active == 0)
             {
                 iPointer.VisilityFollowsDataAvailability = true;
-                iHeadCorrector.start(iETUDriver.Name);
                 iGazeParser.start();
                 iETUDriver.startTracking();
             }

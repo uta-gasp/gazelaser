@@ -236,13 +236,14 @@ namespace GazeLaser
         private void DataAvailabilityTimer_Tick(object sender, EventArgs e)
         {
             double dataAvailability = VisilityFollowsDataAvailability ? -1.0 : 1.0;
+            double prevDataAvailability = iDataAvailability;
+
             if (VisilityFollowsDataAvailability)
             {
                 long dataNotAvailableInterval = iHRTimestamp.Milliseconds - iLastDataTimestamp;
                 if (dataNotAvailableInterval > NoDataVisibilityInterval)
                 {
                     dataAvailability = 1.0 - Math.Min(1.0, (double)(dataNotAvailableInterval - NoDataVisibilityInterval) / FadingInterval);
-                    Console.WriteLine(dataAvailability);
                 }
                 else
                 {
@@ -258,7 +259,10 @@ namespace GazeLaser
 
                 if (iDataAvailability == 0.0)
                 {
-                    OnHide(this, new EventArgs());
+                    if (prevDataAvailability != 1.0)
+                    {
+                        OnHide(this, new EventArgs());
+                    }
                 }
                 else if (iDataAvailability == 1.0)
                 {

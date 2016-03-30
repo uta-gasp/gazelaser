@@ -14,6 +14,7 @@ namespace GazeLaser.Processor
         private readonly List<string> iSourcesOfEyePos = new List<string>()
         {
             "Tobii T/X-series",
+            "Tobii EyeX",
             "The EyeTribe ET-1000",
             "Dikablis",
             "Mouse"

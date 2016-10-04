@@ -1,4 +1,4 @@
-#GazeNet client
+#GazeLaser
 Shows a gaze pointer on a screen.
 
 ##Dependencies
